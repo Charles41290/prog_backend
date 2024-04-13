@@ -1,0 +1,29 @@
+[
+    {
+        "id": 1,
+        "title": "Remera",
+        "description": "Remera manga larga",
+        "price": 30000,
+        "thumbnail": "www.images.com",
+        "code": "NP1",
+        "stock": 15
+    },
+    {
+        "id": 2,
+        "title": "Pantalon",
+        "description": "Pantalon Jean",
+        "price": 15000,
+        "thumbnail": "www.images.com",
+        "code": "NP2",
+        "stock": 7
+    },
+    {
+        "id": 4,
+        "title": "Cinturón",
+        "description": "Cinturon de cuerina",
+        "price": 9000,
+        "thumbnail": "www.images.com",
+        "code": "NP4",
+        "stock": 10
+    }
+]
