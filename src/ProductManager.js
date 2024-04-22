@@ -1,19 +1,38 @@
-const fs = require('fs');
-const path = "./data/productos.json" // ruta del archivo
+//const fs = require('fs');
+import fs from "fs";
 
 class ProductManager {
     // creo un atributo privado que se inicializa como un array vacio en el constructor
     #products;
+    #path;
 
     // metodo constructor 
     constructor() {
-        // al crear un objeto ProductManager leo el archivo productos.json
-        // en caso que le archivo no exista asigna un array vacío al atributo
-        // productos
+        this.#path = "./data/productos.json";
+        this.init();
+    }
+
+    // el método init() se ejecuta al instanciarse un objeto ProductManager
+    init(){
         try {
-            this.#products = JSON.parse(fs.readFileSync(path, "utf-8"));
+            // verifico que exista el archivo en la ruta especificada
+            const exists =fs.existsSync(this.#path)
+            
+            // si el archivo no existe lo creo con un array vacío
+            if (!exists) {
+                fs.writeFileSync(this.#path, JSON.stringify([],null,2));
+                // leo el archivo recién creado y le asigno su valor a 
+                // this.#products
+                this.#products = JSON.parse(fs.readFileSync(this.#path, "utf-8"));
+                console.log("File created");
+            }else{ // en caso que el archivo exista, leo su contenido y se lo asigno
+                // #products
+                console.log("fs connected");
+                this.#products = JSON.parse(fs.readFileSync(this.#path, "utf-8"));
+            }
         } catch (error) {
-            this.#products = []
+            // ocurren cuando no existe el path especificado
+            console.log(error.message);
         }
     }
 
@@ -42,21 +61,27 @@ class ProductManager {
         }
         // si todo está OK ingreso el producto el array products
         this.#products.push(newProduct);
-        await fs.promises.writeFile(path, JSON.stringify(this.#products));
+        await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
     }
 
-    async getProducts() {
+    async getProducts(limit) {
         // utilizo try-catch para  considerar la excepcion que sucederia
         // al intentar leer el archivo productos.json y este no exista
         try {
-            const productsJson = await fs.promises.readFile(path, "utf8");
-            this.#products = JSON.parse(productsJson) || []; // si el .json no tiene productos me asingna un arra vacio
+            const productsJson = await fs.promises.readFile(this.#path, "utf8");
+            this.#products = JSON.parse(productsJson) || []; // si el .json no tiene productos me asingna un array vacio
+            
+            // si el limite es undefined
+            if (!limit) {
+                return this.#products;
+            }
+            return this.#products.slice(0,limit);
+        
         } catch (error) {
             // en caso que suceda la excepción me devuelve un array vacío
             console.log("No hay productos existentes");
             this.#products = [];
         }
-        return this.#products;
     }
 
     async getProductById(id) {
@@ -71,7 +96,7 @@ class ProductManager {
         const product = this.#products.find(prod => prod.id === id);
         if (!product) {
             console.log(`El producto con el ID ${id} no pudo ser encontrado`); // si el producto no existe muestro este mensaje
-            return;
+            return undefined;
         }
         return product;
     }
@@ -89,7 +114,7 @@ class ProductManager {
             ...product // sobreescribo las propiedades con las de product
         }
         // sobre-escribo el archivo
-        await fs.promises.writeFile(path, JSON.stringify(this.#products));
+        await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
     }
 
     async deleteProduct(id){
@@ -98,41 +123,14 @@ class ProductManager {
         // filtro todos los productos cuyos ids sean distinto a productToDelete.id
         this.#products = this.#products.filter(prod => prod.id != productToDelete.id);
         // sobre-escribo el archivo
-        await fs.promises.writeFile(path, JSON.stringify(this.#products));
+        await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
     }
-
 }
 
-// ************ Pruebas ************
-// instancio un objeto a partir de la clase ProductManager
 const productManager = new ProductManager();
+export default productManager;
 
-// Agrego 4 productos
-// productManager.addProduct("Remera", "Remera manga larga", 30000, "www.images.com", "NP1",15);
-// productManager.addProduct("Pantalon", "Pantalon Jean", 15000, "www.images.com", "NP2",7);
-// productManager.addProduct("Campera", "Campera de lana", 25000, "www.images.com", "NP3",4);
-// productManager.addProduct("Cinturón", "Cinturón de cuero", 5000, "www.images.com", "NP4",10);
 
-// obtengo los productos 
-// productManager.getProducts().then(prods => console.log(prods));
-
-// realizo la búsqueda según el id 1
-// productManager.getProductById(1).then(val => console.log(val));
-
-// intento agregar un producto con un codigo ya existente
-// productManager.addProduct("Gorra", "Gorra clásica",6000, "www.images.com", "NP2",4);
-
-// pruebo agregar un producto con únicamente 2 atributos
-//productManager.addProduct("Gorra", "Gorra clásica");
-
-// actualizar el producto
-// productManager.updateProduct(4, {
-//     description: "Cinturon de cuerina",
-//     price: 9000
-// });
-
-// elimino el producto con id = 3
-productManager.deleteProduct(3);
 
 
 
