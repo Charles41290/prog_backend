@@ -52,13 +52,13 @@ class ProductManager {
         // valido que todos los atributos de newProduct no sean undefined
         if (Object.values(newProduct).includes(undefined)) {
             console.log("Todos los atributos son obligatorios");
-            return;
+            return undefined;
         }
 
         // valido que no se repita el atributo code
         if (this.#products.find(prod => prod.code === code)) {
             console.log(`El producto ${title} con el código ${code} ya existe`);
-            return;
+            return undefined;
         }
         // si todo está OK ingreso el producto el array products
         this.#products.push(newProduct);
