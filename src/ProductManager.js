@@ -17,7 +17,6 @@ class ProductManager {
         try {
             // verifico que exista el archivo en la ruta especificada
             const exists =fs.existsSync(this.#path)
-            
             // si el archivo no existe lo creo con un array vacío
             if (!exists) {
                 fs.writeFileSync(this.#path, JSON.stringify([],null,2));
@@ -36,7 +35,8 @@ class ProductManager {
         }
     }
 
-    async addProduct(title, description, price, thumbnail, code, stock) {
+    async addProduct(product) {
+        const {title, description, price, thumbnail, code, stock} = product;
         // creo un nuevo producto
         const newProduct = {
             id: this.#products.length + 1,
@@ -46,6 +46,7 @@ class ProductManager {
             thumbnail,
             code,
             stock,
+            status:true
         }
 
         // valido que todos los atributos de newProduct no sean undefined
@@ -105,25 +106,35 @@ class ProductManager {
         // utilizo el metodo getProductById para verificar que el producto
         // que se desea modificar existe
         const productToUpdate = await this.getProductById(id);
-        // obtengo el indice correspondiente al producto que quiero utilizar
-        // productToUpdate
-        const index = this.#products.findIndex(prod => prod.id === productToUpdate.id);
-        // obtenido el indice lo utilizamos para acceder al elemento y modificarlo
-        this.#products[index] = {
-            ...productToUpdate, // creo una copia del producto a actualizar
-            ...product // sobreescribo las propiedades con las de product
+        if (productToUpdate) {
+            // obtengo el indice correspondiente al producto que quiero utilizar
+            // productToUpdate
+            const index = this.#products.findIndex(prod => prod.id === productToUpdate.id);
+            // obtenido el indice lo utilizamos para acceder al elemento y modificarlo
+            this.#products[index] = {
+                ...productToUpdate, // creo una copia del producto a actualizar
+                ...product // sobreescribo las propiedades con las de product
+            }
+            // sobre-escribo el archivo
+            await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
+            return productToUpdate;
         }
-        // sobre-escribo el archivo
-        await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
+        return undefined;
     }
 
     async deleteProduct(id){
         // obtengo el producto a borrar
         const productToDelete = await this.getProductById(id);
-        // filtro todos los productos cuyos ids sean distinto a productToDelete.id
-        this.#products = this.#products.filter(prod => prod.id != productToDelete.id);
-        // sobre-escribo el archivo
-        await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
+        if (productToDelete) {
+            // filtro todos los productos cuyos ids sean distinto a productToDelete.id
+            this.#products = this.#products.filter(prod => prod.id != productToDelete.id);
+            // sobre-escribo el archivo
+            await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
+            return productToDelete;
+        }
+        // el producto no pudo ser encontrado
+        return undefined;
+        
     }
 }
 
