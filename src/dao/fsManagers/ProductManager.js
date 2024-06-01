@@ -8,7 +8,7 @@ class ProductManager {
 
     // metodo constructor 
     constructor() {
-        this.#path = "./src/dao/data/productos.json";
+        this.#path = "./src/dao/fsManagers/data/productos.json";
         this.init();
     }
 

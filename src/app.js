@@ -3,6 +3,10 @@ import routes from "./routes/index.js"
 import viewRoutes from "./routes/views.routes.js"
 import handlebars from "express-handlebars";
 import __dirname from "./dirname.js";
+import { connectMongoDb } from "./config/mongoDb.config.js";
+
+// establecemos conexión con mongoDB
+connectMongoDb();
 
 // creo una aplicacion/servidor de express
 const app = express();

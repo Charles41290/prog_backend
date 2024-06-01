@@ -1,5 +1,6 @@
 import { Router, response } from "express";
 import cartManager from "../dao/fsManagers/CartManager.js";
+import cartDao from "../dao/mongoDao/cart.dao.js";
 
 const router = Router();
 
@@ -13,7 +14,8 @@ router.get("/api/cart", async (req, res) => {
 router.get("/api/cart/:cid", async (req, res) => {
     try {
         const {cid} = req.params;
-        const cart = await cartManager.getCartById(parseInt(cid))
+        //const cart = await cartManager.getCartById(parseInt(cid))
+        const cart = await cartDao.getByID(cid)
         if (!cart) {
             const error = new Error("Cart Not Found");
             error.status = 404;
@@ -26,15 +28,17 @@ router.get("/api/cart/:cid", async (req, res) => {
 });
 
 router.post("/api/cart/", async (req, res) => {
-    const {cid} = req.params;
-    const newCart = await cartManager.addCart();
-    return res.json({status:200,response:newCart});
+    //const newCart = await cartManager.addCart();
+    const newCart = await cartDao.create();
+    return res.json({status:200,response:[]});
 });
 
 router.post("/api/cart/:cid/product/:pid", async (req, res) => {
     try {
         const {cid,pid} = req.params;
-        const cart = await cartManager.addProductToCart(parseInt(cid),parseInt(pid));
+        //const cart = await cartManager.addProductToCart(parseInt(cid),parseInt(pid));
+        const cart = await cartDao.addProductToCart(cid,pid);
+        console.log("cart",cart);
         if(cart.cart == false){
             const error = new Error(`Cart with id:${cid} Not Found`);
             error.status = 404;

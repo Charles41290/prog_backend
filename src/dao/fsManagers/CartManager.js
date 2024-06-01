@@ -9,7 +9,7 @@ class CartManager {
 
     // metodo constructor 
     constructor() {
-        this.#path = "./src/dao/data/carts.json";
+        this.#path = "./src/dao/fsManagers/data/carts.json";
         this.init();
     }
 
