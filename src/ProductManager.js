@@ -37,7 +37,7 @@ class ProductManager {
 
     async addProduct(product) {
         const {title, description, price, thumbnail, code, stock} = product;
-        // creo un nuevo producto
+        // creo un nuevo producto a partir de los atributos de product
         const newProduct = {
             id: this.#products.length + 1,
             title,
