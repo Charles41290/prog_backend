@@ -8,7 +8,7 @@ class ProductManager {
 
     // metodo constructor 
     constructor() {
-        this.#path = "./data/productos.json";
+        this.#path = "./src/dao/data/productos.json";
         this.init();
     }
 
@@ -63,6 +63,7 @@ class ProductManager {
         // si todo está OK ingreso el producto el array products
         this.#products.push(newProduct);
         await fs.promises.writeFile(this.#path, JSON.stringify(this.#products));
+        return newProduct;
     }
 
     async getProducts(limit) {

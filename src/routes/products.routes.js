@@ -1,5 +1,5 @@
 import { Router } from "express";
-import productManager from "../managers/ProductManager.js";
+import productManager from "../dao/fsManagers/ProductManager.js";
 
 const router = Router();
 
@@ -36,6 +36,7 @@ router.post("/api/products", async (req, res) => {
     try {
         const product = req.body;
         const newProduct  = await productManager.addProduct(product);
+        console.log(newProduct);
         if (newProduct) {
             return res.json({status:201, response: newProduct});
         }
