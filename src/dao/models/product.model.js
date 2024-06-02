@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import mongoosePaginate from "mongoose-paginate-v2"
 
 // nombre de la collection que almacena los documentos de productos
 const productCollection = "products";
@@ -32,8 +33,15 @@ const productSchema = mongoose.Schema({
     status: {
         type:Boolean,
         default: true
-    } 
+    },
+    category: {
+        type:String,
+        required:true
+    }
 });
+
+//agregamos al Schema el plugin de mongoose-paginate
+productSchema.plugin(mongoosePaginate);
 
 // mongoose.model recibe el nombre de la collection y el schema
 export const productModel = mongoose.model(productCollection,productSchema);

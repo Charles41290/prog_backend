@@ -4,12 +4,31 @@ import productDao from "../dao/mongoDao/product.dao.js"
 
 const router = Router();
 
-// configuramos solicitudes
+// ruta para obtener los productos
 router.get("/api/products", async (req, res) => {
     try {
-        //const {limit} = req.query;
-        //const products =  await productManager.getProducts(limit);
-        const products = await productDao.getAll();
+        //recibo 
+        const {limit, page, sort,category,status } = req.query;
+        const options = {
+            limit:limit || 10, // si no hay limit por defecto es 10
+            page: page || 1, // si no hay page for defecto es 1
+            sort:{price: sort === "asc" ? 1 : -1}, // por defecto toma el orden descendente(-1)
+            lean:true // propiedad que solicita el mongoose-paginate
+        }
+
+        // si tengo el category y el status definido
+        if (category) {
+            const products = await productDao.getAll({category:category})
+            return res.json({status:200,payload:products})
+        }
+
+        if (status) {
+            const products = await productDao.getAll({status:status})
+            return res.json({status:200,payload:products})
+        }
+
+        // en caso que no haya category/status en recibe un objeto vacio {}
+        const products = await productDao.getAll({}, options);
         return res.json({status:200, response: products} )
     } catch (error) {
         console.log(error);
@@ -23,8 +42,6 @@ router.get("/api/products/:pid", async (req, res) => {
         const {pid} = req.params;
         //const product =  await productManager.getProductById(parseInt(pid));
         const product =  await productDao.getById(pid);
-
-        console.log(product);
         // si el product NO existe me lanza un error que toma el catch
         if (!product) {
             const error = new Error("Product Not Found");

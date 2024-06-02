@@ -4,10 +4,14 @@ const cartCollection = "carts";
 
 const cartSchema = mongoose.Schema({
     products:{
-        type:Array,
+        type:[
+            {
+                product:{type:mongoose.Schema.Types.ObjectId, ref:"products"},
+                quantity:Number
+            }
+        ],
         default:[]
     }
-
 })
 
 export const cartModel = mongoose.model(cartCollection, cartSchema);
