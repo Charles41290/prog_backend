@@ -117,6 +117,20 @@ router.delete("/api/cart/:cid", async (req,res) => {
     }
 });
 
+// ruta para actualizar el carrito con un array de productos
+// TODO 
+router.put("/api/cart/:cid", async (req, res) =>{
+    try {
+        const {cid} = req.params;
+        const data = req.body;
+        const cart = await cartDao.updateCartById(cid,data);
+        if(!cart){return res.json({status:400, msg:"Cart Not Found"})}
+        return res.json({status:200,payload:cart});
+    } catch (error) {
+        return res.json({status: error.status, response:error.message})
+    }
+})
+
 
 
 export default router;
