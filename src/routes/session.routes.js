@@ -23,6 +23,7 @@ router.post("/register", async (req, res) => {
 // usamos post porque estamos enviando info al server
 router.post("/login", async (req, res) => {
     try {
+        // recibimos email y pass del cuerpo del body
         const {email, password} = req.body;
         // verificamos si el usuario es administrador
         // si se cumple guardamos un session
@@ -33,23 +34,37 @@ router.post("/login", async (req, res) => {
             }
             return res.json({status:201, payload:req.session.user})
         }
-
         // si no es administrador
         // busco un usuario por mail
         const user = await userDao.getByEmail(email);
-        // verfico si encontro el usuario o si la 
+        // verfico si encontro el usuario(se busca por email) 
+        // o si la contraseña no corresponde con la del usuario
         if(!user || user.password !== password){
             return res.json({status:401, msg:"Email o contraseña no válidos"});
         }
 
-        res.json({status:201, payload:{email, password}})
-        
+        // creamos la session del usuario
+        req.session.user = {
+            email,
+            role:"user"
+        }
+
+        res.json({status:201, payload:req.session.user})
     } catch (error) {
         console.log(error);
-        res.json({status:500, msg:"Error interno en el servidor"})
+        res.json({status:500, msg:"Error interno en el servidor"});
     }
 });
 
-
+// ruta para desloguearse
+router.get("/logout", async (req, res) => {
+    try {
+        req.session.destroy();
+        res.json({status:200, payload:"Sesión cerrada con éxito"})
+    } catch (error) {
+        console.log(error);
+        res.json({status:500, msg:"Error interno en el servidor"});
+    }
+})
 
 export default router;

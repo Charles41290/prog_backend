@@ -17,8 +17,8 @@ const getByEmail = async (email) => {
 }
 
 const create = async (data) => {
-    const newuser = await userModel.create(data);
-    return newuser;
+    const newUser = await userModel.create(data);
+    return newUser;
 }
 
 const update = async (id, data) => {

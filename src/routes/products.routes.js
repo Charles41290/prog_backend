@@ -1,11 +1,16 @@
 import { Router } from "express";
 //import productManager from "../dao/fsManagers/ProductManager.js";
 import productDao from "../dao/mongoDao/product.dao.js"
+import { isLogin } from "../middlewares/isLogin.middleware.js";
 
 const router = Router();
 
 // ruta para obtener los productos
-router.get("/api/products", async (req, res) => {
+// agrego el middleware isLogin para verificar que si se está
+// logueado me muestre los productos
+// si queremos verificar el login en todos los endpoints
+// podemos utilizar el middleware en el index de rutas
+router.get("/api/products", isLogin ,async (req, res) => {
     try {
         //recibo 
         const {limit, page, sort,category,status } = req.query;

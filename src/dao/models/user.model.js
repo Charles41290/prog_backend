@@ -8,6 +8,6 @@ const userSchema = new mongoose.Schema({
     email:String,
     password:String,
     age:Number
-})
+});
 
 export const userModel = mongoose.model(userCollection, userSchema);

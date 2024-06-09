@@ -24,14 +24,16 @@ app.listen(port, ready);
 // configuro el server con otras funcionalidades (Middleware)
 app.use(express.json()); // para devolver archivos json
 app.use(express.urlencoded({extended:true})); // para leer params (mediante postman??)
-// configuro la session con mongo
+// configuro la session con mongo -> de la creacion y eliminacion de la sesion 
+// se encarga mongo
+// por defecto se crea una session collection
 app.use(session({
     store:MongoStore.create({
         mongoUrl:"mongodb+srv://admin:admin12345@e-commerce.hvkblbb.mongodb.net/ecommerce",
         ttl:15 // tiempo de duración 15 mins
     }),
     secret:"coder12345",
-    resave:true
+    resave:true,
 }));
 
 // config de hadlebars 
