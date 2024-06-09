@@ -2,6 +2,7 @@ import { Router } from "express";
 import productRoutes from "./products.routes.js"
 import cartRoutes from "./cart.routes.js"
 import testRoutes from "./test.routes.js"
+import sessionRoutes from "./session.routes.js"
 
 const router = Router();
 
@@ -13,6 +14,9 @@ router.use("/",cartRoutes);
 
 // especifico las rutas para test
 router.use("/",testRoutes);
+
+// especifico las rutas para session
+router.use("/api/session", sessionRoutes);
 
 export default router;
 

@@ -4,6 +4,8 @@ import viewRoutes from "./routes/views.routes.js"
 import handlebars from "express-handlebars";
 import __dirname from "./dirname.js";
 import { connectMongoDb } from "./config/mongoDb.config.js";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 
 // establecemos conexión con mongoDB
 connectMongoDb();
@@ -22,6 +24,15 @@ app.listen(port, ready);
 // configuro el server con otras funcionalidades (Middleware)
 app.use(express.json()); // para devolver archivos json
 app.use(express.urlencoded({extended:true})); // para leer params (mediante postman??)
+// configuro la session con mongo
+app.use(session({
+    store:MongoStore.create({
+        mongoUrl:"mongodb+srv://admin:admin12345@e-commerce.hvkblbb.mongodb.net/ecommerce",
+        ttl:15 // tiempo de duración 15 mins
+    }),
+    secret:"coder12345",
+    resave:true
+}));
 
 // config de hadlebars 
 app.engine("handlebars", handlebars.engine()); //inicio el motor  de plantilla
