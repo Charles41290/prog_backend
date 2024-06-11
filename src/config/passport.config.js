@@ -87,8 +87,8 @@ const initializePassword = () => {
         "google",
         new GoogleStrategy(
             {
-                clientID: "423247972623-flur9mtqd85f1al62iqvl2vudq3gm8v7.apps.googleusercontent.com",
-                clientSecret: "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",
+                clientID: "",
+                clientSecret: "",
                 callbackURL: "http://localhost:8080/api/session/login/google" // direccion del endpoint a donde se va a redireccionar una vez logueado
             },
             async (accessToken, refreshToke, profile, cb) => {
