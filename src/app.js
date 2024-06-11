@@ -34,6 +34,7 @@ app.use(session({
     }),
     secret:"coder12345",
     resave:true,
+    saveUninitialized:true
 }));
 
 // config de hadlebars 
