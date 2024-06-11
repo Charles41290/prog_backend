@@ -29,6 +29,22 @@ router.post("/register", passport.authenticate("register") ,async (req, res) => 
     }
 });
 
+// ruta para acceder mediante google
+router.get("/login/google", 
+    passport.authenticate("google",{
+        scope:["https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile"],
+        session:false
+    }),
+    async (req, res) => {
+        try {
+            res.json({status:201, payload:req.user})
+        } catch (error) {
+            console.log(error);
+            res.json({status:500, msg:"Error interno en el servidor"});
+        }
+    }
+)
+
 // ruta para desloguearse
 router.get("/logout", async (req, res) => {
     try {
@@ -38,6 +54,6 @@ router.get("/logout", async (req, res) => {
         console.log(error);
         res.json({status:500, msg:"Error interno en el servidor"});
     }
-})
+});
 
 export default router;

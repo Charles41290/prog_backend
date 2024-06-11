@@ -1,10 +1,12 @@
 import passport from "passport";
 import local from "passport-local";
 import userDao from "../dao/mongoDao/user.dao.js";
+import google from "passport-google-oauth20";
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
 
-//configuramos la estrategia local
+//configuramos la estrategia local y de google
 const LocalStrategy = local.Strategy;
+const GoogleStrategy = google.Strategy;
 
 // creamos una función para inicializar las estrategias
 const initializePassword = () => {
@@ -78,9 +80,39 @@ const initializePassword = () => {
                 }
             }
         )
-
     );
 
+    // definimos una estrategia google 
+    passport.use(
+        "google",
+        new GoogleStrategy(
+            {
+                clientID: "423247972623-flur9mtqd85f1al62iqvl2vudq3gm8v7.apps.googleusercontent.com",
+                clientSecret: "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",
+                callbackURL: "http://localhost:8080/api/session/login/google" // direccion del endpoint a donde se va a redireccionar una vez logueado
+            },
+            async (accessToken, refreshToke, profile, cb) => {
+                try {
+                    // el profile lo obtengo de la api de google
+                    const {id, name, emails, username} = profile;
+                    const user = {
+                        // givenName y familyName son atributos del objeto name que está en profile
+                        first_name: name.givenName,
+                        last_name: name.familyName,
+                        email:emails[0].value // emails en un array
+                    }
+                    // verifico si existe el usuario
+                    const existUser = await userDao.getByEmail(emails[0].value);
+                    if(existUser) return cb(null, existUser); // paso el usuario para que sea serializado
+                    // si el usuario no existe lo creo
+                    const newUser = await userDao.create(user);
+                    cb(null, newUser);
+                } catch (error) {
+                    cb(error);
+                }
+            }
+        )
+    )
 }
 
 export default initializePassword;
