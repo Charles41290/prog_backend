@@ -10,7 +10,7 @@ const router = Router();
 // logueado me muestre los productos
 // si queremos verificar el login en todos los endpoints
 // podemos utilizar el middleware en el index de rutas
-router.get("/api/products", isLogin ,async (req, res) => {
+router.get("/api/products",async (req, res) => {
     try {
         //recibo 
         const {limit, page, sort,category,status } = req.query;
