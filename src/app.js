@@ -6,6 +6,8 @@ import __dirname from "./dirname.js";
 import { connectMongoDb } from "./config/mongoDb.config.js";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import passport from "passport";
+import initializePassword from "./config/passport.config.js"
 
 // establecemos conexión con mongoDB
 connectMongoDb();
@@ -36,6 +38,10 @@ app.use(session({
     resave:true,
     saveUninitialized:true
 }));
+// configuramos los middleware para usar passport
+app.use(passport.initialize());
+app.use(passport.session());
+initializePassword();
 
 // config de hadlebars 
 app.engine("handlebars", handlebars.engine()); //inicio el motor  de plantilla
