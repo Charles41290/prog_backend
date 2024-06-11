@@ -8,6 +8,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import passport from "passport";
 import initializePassword from "./config/passport.config.js"
+import cookieParser from "cookie-parser";
 
 // establecemos conexión con mongoDB
 connectMongoDb();
@@ -42,6 +43,9 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 initializePassword();
+
+//configuro el middleware para cookieParser
+app.use(cookieParser("secret"));
 
 // config de hadlebars 
 app.engine("handlebars", handlebars.engine()); //inicio el motor  de plantilla
