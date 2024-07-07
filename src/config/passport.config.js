@@ -83,7 +83,7 @@ const initializePassword = () => {
     );
 
     // definimos una estrategia google 
-    passport.use(
+    /* passport.use(
         "google",
         new GoogleStrategy(
             {
@@ -112,7 +112,7 @@ const initializePassword = () => {
                 }
             }
         )
-    )
+    ) */
 }
 
 export default initializePassword;
