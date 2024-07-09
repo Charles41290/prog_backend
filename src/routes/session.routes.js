@@ -72,7 +72,7 @@ router.post("/login/jwt", async (req,res) => {
 });
 
 // obtengo el usuario por token
-router.get("/current", (req, res) => {
+router.get("/current",passportCall("jwt"), authorization("user") , (req, res) => {
     try {
         //const {token} = req.body;
         // en lugar de recibir el token desde el body lo obtenemos desde una cookie

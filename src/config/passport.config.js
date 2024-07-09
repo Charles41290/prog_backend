@@ -1,12 +1,27 @@
 import passport from "passport";
 import local from "passport-local";
+import jwt from "passport-jwt"
 import userDao from "../dao/mongoDao/user.dao.js";
 import google from "passport-google-oauth20";
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
 
-//configuramos la estrategia local y de google
+//configuramos la estrategia local,de google y passport-jwt
 const LocalStrategy = local.Strategy;
 const GoogleStrategy = google.Strategy;
+const JWTStrategy = jwt.Strategy;
+// necesitamos extraer el token de la cookie creada en 
+// session.routes .post(login/jwt)
+const ExtractJWT = jwt.ExtractJwt; // .ExtractJwt nos permite extraer info de la request
+
+// creamos una funcion para extraer la cookie
+const CookieExtractor = (req) =>{
+    let token = null;
+    // verificamos que haya una request y que tenga una cookie
+    if(req && req.cookies){
+        token = req.cookies.token; // la cookie tiene el nombre de token
+    }
+    return token;
+}
 
 // creamos una función para inicializar las estrategias
 const initializePassword = () => {
@@ -113,6 +128,25 @@ const initializePassword = () => {
             }
         )
     ) */
+
+    //configuramos la estrategia
+    passport.use("jwt", 
+        new JWTStrategy(
+            {
+                jwtFromRequest: ExtractJWT.fromExtractors([CookieExtractor]) , //extrae la info de la request -> recibe como arg un array de las funciones para extraer la cookie
+                secretOrKey: "secret12345" // coinicide con el secret config en utils/jwt.js
+            },
+            async (jwt_payload, done) => { // en payload está el token
+                try {
+                    return done(null, jwt_payload)
+                } catch (error) {
+                    return done(error)
+                }
+            }
+        )
+    );
 }
+
+
 
 export default initializePassword;
