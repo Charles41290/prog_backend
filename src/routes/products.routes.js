@@ -2,6 +2,8 @@ import { Router } from "express";
 //import productManager from "../dao/fsManagers/ProductManager.js";
 import productDao from "../dao/mongoDao/product.dao.js"
 import { isLogin } from "../middlewares/isLogin.middleware.js";
+import {passportCall, authorization} from "../middlewares/passport.middleware.js"
+
 
 const router = Router();
 
@@ -59,7 +61,7 @@ router.get("/api/products/:pid", async (req, res) => {
     }
 });
 
-router.post("/api/products", async (req, res) => {
+router.post("/api/products",passportCall("jwt"), authorization("admin"), async (req, res) => {
     try {
         const product = req.body;
         //const newProduct  = await productManager.addProduct(product);
@@ -78,7 +80,7 @@ router.post("/api/products", async (req, res) => {
     }
 });
 
-router.put("/api/products/:pid", async (req, res) => {
+router.put("/api/products/:pid",passportCall("jwt"), authorization("admin"), async (req, res) => {
     try {
         const {pid} = req.params;
         const product = req.body;
@@ -99,7 +101,7 @@ router.put("/api/products/:pid", async (req, res) => {
     }
 });
 
-router.delete("/api/products/:pid", async (req, res) => {
+router.delete("/api/products/:pid", passportCall("jwt"), authorization("admin"), async (req, res) => {
     try {
         const {pid} = req.params;
         //const deletedProduct = await productManager.deleteProduct(parseInt(pid));

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import env from "./env.config.js"
 
 const nameDB = 'ecommerce'
 const urlDB = `mongodb+srv://admin:admin12345@e-commerce.hvkblbb.mongodb.net/${nameDB}`

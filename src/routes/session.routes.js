@@ -3,6 +3,8 @@ import userDao from "../dao/mongoDao/user.dao.js";
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
 import passport from "passport";
 import { createToken, verifyToken } from "../utils/jwt.js";
+import { passportCall, authorization } from "../middlewares/passport.middleware.js";
+//import { authorization } from "../middlewares/passport.middleware.js";
 
 const router = Router();
 

@@ -37,7 +37,7 @@ const initializePassword = () => {
             async (req, username, password, done) => {
                 try {
                     const user = await userDao.getByEmail(username);
-                    const {first_name, last_name, email, age} = req.body;
+                    const {first_name, last_name, email, age, role} = req.body;
                     // si el usuario ya existe retono un mensaje
                     // done es un metodo interno llamado internamente por la 
                     // implementación de la estrategia
@@ -50,7 +50,8 @@ const initializePassword = () => {
                         last_name,
                         email,
                         age,
-                        password: createHash(password)
+                        password: createHash(password),
+                        role
                     }
                     // si el usuario no existe lo creo y lo retorno mediante done
                     const createdUser = await userDao.create(newUser);
