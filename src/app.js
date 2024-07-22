@@ -56,4 +56,4 @@ app.set("view engine", "handlebars"); // indico el motor a utilizar
 app.use("/", routes);
 app.use("/",viewRoutes);
 
-console.log(env);
+//console.log(env);

@@ -92,9 +92,10 @@ const updateProductQuantityInCart = async (pid, cid, quantity) => {
 // actualizo el array de products en el carrito
 // TODO -> verificar el por que no funciona
 const updateCartById = async (cid,data) =>{
-    await cartModel.updateOne({_id:cid},{$set: {products:[data]}});
+    /* await cartModel.updateOne({_id:cid},{$set: {products:[data]}});
     const cart = await cartModel.findById(cid);
-    return cart;
+    return cart; */
+    return cartModel.findByIdAndUpdate(cid, data);
 };
 
 export default {getByID, create, addProductToCart,deleteProductInCart, deleteAllProductsInCart, updateProductQuantityInCart,updateCartById}

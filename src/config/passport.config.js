@@ -148,6 +148,4 @@ const initializePassword = () => {
     );
 }
 
-
-
 export default initializePassword;
