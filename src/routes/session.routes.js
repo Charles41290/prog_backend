@@ -6,6 +6,7 @@ import { createToken, verifyToken } from "../utils/jwt.js";
 import { passportCall, authorization } from "../middlewares/passport.middleware.js";
 //import { authorization } from "../middlewares/passport.middleware.js";
 import sessionController from "../controllers/session.controller.js";
+import { sendMail } from "../utils/sendMails.js";
 
 const router = Router();
 
@@ -38,7 +39,8 @@ router.get("/current",passportCall("jwt"), authorization("user") , sessionContro
 router.get("/logout", sessionController.logout);
 
 router.get("/email", async (req, res)=> {
-    await 
+    await sendMail("carlosromero41290@gmail.com", "Test nodemailer", "Este es un mensaje de prueba");
+    return res.json({status: "200", msg:"Email enviado"});
 });
 
 export default router;
