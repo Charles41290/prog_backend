@@ -1,4 +1,4 @@
-/* import mongoose from "mongoose";
+import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2"
 
 // nombre de la collection que almacena los documentos de productos
@@ -46,4 +46,3 @@ productSchema.plugin(mongoosePaginate);
 // mongoose.model recibe el nombre de la collection y el schema
 export const productModel = mongoose.model(productCollection,productSchema);
 
- */

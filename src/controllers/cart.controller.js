@@ -1,10 +1,11 @@
-import cartDao from "../dao/mongoDao/cart.dao.js";
+import cartService from "../services/cart.service.js";
 
 const getCartById = async (req, res) => {
     try {
         const {cid} = req.params;
         //const cart = await cartManager.getCartById(parseInt(cid))
-        const cart = await cartDao.getByID(cid)
+        //const cart = await cartDao.getByID(cid)
+        const cart = await cartService.getCartById(cid)
         if (!cart) {
             const error = new Error("Cart Not Found");
             error.status = 404;
@@ -16,9 +17,11 @@ const getCartById = async (req, res) => {
     }
 }
 
+// fue agregado cartService
 const createCart = async (req, res) => {
     try{
-        const newCart = await cartDao.create();
+        //const newCart = await cartDao.create();
+        const newCart = await cartService.createCart();
         return res.json({status:200,response:"Success"});
     } catch (e){
         return res.json({status:500,response:"Error interno del servidor"});
@@ -29,7 +32,8 @@ const addProductToCart = async (req, res) => {
     try {
         const {cid,pid} = req.params;
         //const cart = await cartManager.addProductToCart(parseInt(cid),parseInt(pid));
-        const cart = await cartDao.addProductToCart(cid,pid);
+        //const cart = await cartDao.addProductToCart(cid,pid);
+        const cart = await cartService.addProductToCart(cid,pid);
         if(cart.cart == false){
             const error = new Error(`Cart with id:${cid} Not Found`);
             error.status = 404;
@@ -50,7 +54,7 @@ const updateProductQuantityInCart = async (req, res) => {
     try {
         const {pid,cid} = req.params;
         const {quantity} = req.body;
-        const cart = await cartDao.updateProductQuantityInCart(pid,cid,quantity)
+        const cart = await cartService.updateProductQuantityInCart(pid,cid,quantity)
         if(cart.product == false){
             const error = new Error(`Product with id:${pid} Not Found`);
             error.status = 404;
@@ -70,7 +74,7 @@ const updateProductQuantityInCart = async (req, res) => {
 const deleteProductInCart = async (req,res) => {
     try {
         const {cid,pid}=req.params;
-        const cart = await cartDao.deleteProductInCart(cid, pid);
+        const cart = await cartService.deleteProductInCart(cid, pid);
         if(cart.prod == false){
             const error = new Error(`Product with id:${pid} Not Found`);
             error.status = 404;
@@ -90,7 +94,7 @@ const deleteProductInCart = async (req,res) => {
 const deleteAllProductsInCart = async (req,res) => {
     try {
         const {cid,pid}=req.params;
-        const cart = await cartDao.deleteAllProductsInCart(cid);
+        const cart = await cartService.deleteAllProductsInCart(cid);
         if (cart.cart == false) {
             const error = new Error(`Cart with id:${cid} Not Found`);
             error.status = 404;
@@ -102,11 +106,12 @@ const deleteAllProductsInCart = async (req,res) => {
     }
 }
 
+// REVISAR
 const updateCartById = async (req, res) =>{
     try {
         const {cid} = req.params;
         const data = req.body;
-        const cart = await cartDao.updateCartById(cid,data);
+        const cart = await cartService.updateCartById(cid,data);
         if(!cart){return res.json({status:400, msg:"Cart Not Found"})}
         return res.json({status:200,payload:cart});
     } catch (error) {

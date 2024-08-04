@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-//import { cartModel } from "../models/cart.model.js";
-import productDao from "./product.dao.js";
-//import { productModel } from "../models/product.model.js";
+//import productDao from "./product.dao.js";
+import { cartModel } from "../models/cart.model.js";
+import { productModel } from "../models/product.model.js";
 
 const getByID = async (id) => {
     const cart = await cartModel.findById(id);

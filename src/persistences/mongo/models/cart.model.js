@@ -1,4 +1,4 @@
-/* import mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const cartCollection = "carts";
 
@@ -14,4 +14,4 @@ const cartSchema = mongoose.Schema({
     }
 })
 
-export const cartModel = mongoose.model(cartCollection, cartSchema); */
+export const cartModel = mongoose.model(cartCollection, cartSchema);

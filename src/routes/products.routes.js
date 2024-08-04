@@ -17,9 +17,11 @@ router.get("/api/products", productController.getAllProducts);
 //utilizo req.params para obtener un producto según id
 router.get("/api/products/:pid", productController.getProductById);
 
-router.post("/api/products",passportCall("jwt"), authorization("admin"), productController.createProduct);
+//router.post("/api/products",passportCall("jwt"), authorization("admin"), productController.createProduct);
+router.post("/api/products", productController.createProduct);
 
-router.put("/api/products/:pid",passportCall("jwt"), authorization("admin"),productController.updateProduct);
+//router.put("/api/products/:pid",passportCall("jwt"), authorization("admin"),productController.updateProduct);
+router.put("/api/products/:pid",productController.updateProduct);
 
 router.delete("/api/products/:pid", passportCall("jwt"), authorization("admin"), productController.deleteProduct);
 

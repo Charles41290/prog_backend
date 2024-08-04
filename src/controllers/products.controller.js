@@ -1,4 +1,5 @@
-import productDao from "../dao/mongoDao/product.dao.js";
+//import productDao from "../dao/mongoDao/product.dao.js";
+import productService from "../services/product.service.js";
 
 const getAllProducts = async (req, res) => {
     try {
@@ -13,17 +14,20 @@ const getAllProducts = async (req, res) => {
 
         // si tengo el category y el status definido
         if (category) {
-            const products = await productDao.getAll({category:category})
+            //const products = await productDao.getAll({category:category})
+            const products = await productService.getAllProducts({category:category})
             return res.json({status:200,payload:products})
         }
 
         if (status) {
-            const products = await productDao.getAll({status:status})
+            //const products = await productDao.getAll({status:status})
+            const products = await productService.getAllProducts({status:status})
             return res.json({status:200,payload:products})
         }
 
         // en caso que no haya category/status en recibe un objeto vacio {}
-        const products = await productDao.getAll({}, options);
+        //const products = await productDao.getAll({}, options);
+        const products = await productService.getAllProducts({}, options);
         return res.json({status:200, response: products} )
     } catch (error) {
         console.log(error);
@@ -35,7 +39,8 @@ const getProductById = async (req, res) => {
         // tengo que obtener del request el param/query pid
         const {pid} = req.params;
         //const product =  await productManager.getProductById(parseInt(pid));
-        const product =  await productDao.getById(pid);
+        //const product =  await productDao.getById(pid);
+        const product =  await productService.getProductById(pid);
         // si el product NO existe me lanza un error que toma el catch
         if (!product) {
             const error = new Error("Product Not Found");
@@ -52,7 +57,8 @@ const createProduct = async (req, res) => {
     try {
         const product = req.body;
         //const newProduct  = await productManager.addProduct(product);
-        const newProduct  = await productDao.create(product);
+        //const newProduct  = await productDao.create(product);
+        const newProduct  = await productService.createProduct(product);
         if (newProduct) {
             return res.json({status:201, response: newProduct});
         }
@@ -72,7 +78,8 @@ const updateProduct =  async (req, res) => {
         const {pid} = req.params;
         const product = req.body;
         //const updatedProduct = await productManager.updateProduct(parseInt(pid), product);
-        const updatedProduct = await productDao.update(pid, product);
+        //const updatedProduct = await productDao.update(pid, product);
+        const updatedProduct = await productService.updateProduct(pid, product);
         if (updatedProduct) {
             return res.json({status:201, response: updatedProduct});
         }
@@ -92,7 +99,8 @@ const deleteProduct = async (req, res) => {
     try {
         const {pid} = req.params;
         //const deletedProduct = await productManager.deleteProduct(parseInt(pid));
-        const deletedProduct = await productDao.deleteOne(pid);
+        //const deletedProduct = await productDao.deleteOne(pid);
+        const deletedProduct = await productService.deleteProduct(pid);
         if (deletedProduct) {
             return res.json({status:201, response: deletedProduct});
         }
