@@ -3,6 +3,7 @@
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
 import { createToken, verifyToken } from "../utils/jwt.js";
 import userRepository from "../persistences/mongo/repositories/user.repository.js";
+import { userResponseDto } from "../dto/user-response.dto.js";
 
 const createUser = async (req, res) => {
     try {
@@ -47,8 +48,8 @@ const userLoginJWT = async (req,res) => {
         //el token creado se almacena en una cookie llamada cookie
         // cont httpOnly me aseguro que la única forma de acceder a la cookie sea mediante http
         res.cookie("token", token, {httpOnly:true});
-
-        res.json({status:201, payload:user,token});
+        const userDto = userResponseDto(user);
+        res.json({status:201, payload:userDto,token});
     } catch (error) {
         console.log(error);
         res.json({status:500, msg:"Error interno en el servidor"});

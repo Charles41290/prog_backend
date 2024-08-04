@@ -1,3 +1,4 @@
+import { productDto } from "../dto/product-response.dto.js";
 import productRepository from "../persistences/mongo/repositories/product.repository.js";
 
 const getAllProducts = async (query, options) => {
@@ -6,7 +7,8 @@ const getAllProducts = async (query, options) => {
 }
 
 const getProductById = async (id) => {
-    const product = await productRepository.getProductById(id);
+    const productData = await productRepository.getProductById(id);
+    const product = productDto(productData);
     return product;
 }
 

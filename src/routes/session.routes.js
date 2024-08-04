@@ -37,4 +37,8 @@ router.get("/current",passportCall("jwt"), authorization("user") , sessionContro
 // ruta para desloguearse
 router.get("/logout", sessionController.logout);
 
+router.get("/email", async (req, res)=> {
+    await 
+});
+
 export default router;
