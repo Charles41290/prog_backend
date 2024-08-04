@@ -1,7 +1,8 @@
 import passport from "passport";
 import local from "passport-local";
 import jwt from "passport-jwt"
-import userDao from "../dao/mongoDao/user.dao.js";
+//import userDao from "../dao/mongoDao/user.dao.js";
+import userRepository from "../persistences/mongo/repositories/user.repository.js";
 import google from "passport-google-oauth20";
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
 
@@ -36,7 +37,7 @@ const initializePassword = () => {
             {passReqToCallback:true, usernameField:"email"},
             async (req, username, password, done) => {
                 try {
-                    const user = await userDao.getByEmail(username);
+                    const user = await userRepository.getByEmail(username);
                     const {first_name, last_name, email, age, role} = req.body;
                     // si el usuario ya existe retono un mensaje
                     // done es un metodo interno llamado internamente por la 
@@ -54,7 +55,7 @@ const initializePassword = () => {
                         role
                     }
                     // si el usuario no existe lo creo y lo retorno mediante done
-                    const createdUser = await userDao.create(newUser);
+                    const createdUser = await userRepository.create(newUser);
                     // null indica que no ha ocurrido error
                     return done(null, createdUser);
                 } catch (error) {
@@ -75,7 +76,7 @@ const initializePassword = () => {
     // deserializeUser -> recuperamos el user mediante el identificador unico configurado(id)
     // en serializeUser() -> el identificador unico puede ser cualquier atributo del user
     passport.deserializeUser(async (id, done) => {
-        const user = await userDao.getById(id);
+        const user = await userRepository.getById(id);
         done(null, user);
     });
 
@@ -86,7 +87,7 @@ const initializePassword = () => {
             {usernameField:"email"},
             async (username, password, done) => {
                 try {
-                    const user = await userDao.getByEmail(username);
+                    const user = await userRepository.getByEmail(username);
                     if (!user || !isValidPassord(user, password)) {
                         return done(null, false, {msg:"Email o password inválido"});
                     }

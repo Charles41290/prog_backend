@@ -5,6 +5,7 @@ import productDao from "../dao/mongoDao/product.dao.js";
 import passport from "passport";
 import { passportCall,authorization } from "../middlewares/passport.middleware.js";
 import cartController from "../controllers/cart.controller.js";
+import { checkProductAndCart } from "../middlewares/checkProductAndCart.middleware.js";
 
 const router = Router();
 
@@ -23,15 +24,15 @@ router.post("/api/cart/", passportCall("jwt"),authorization("user"), cartControl
 
 // ruta para agregar productos al carrito ya creado
 //router.post("/api/cart/:cid/product/:pid", async (req, res) => {
-router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization("user"), cartController.addProductToCart);
+router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization("user"), checkProductAndCart, cartController.addProductToCart);
 
 // ruta para modificar la cantidad de un producto que ya esté en carrito
 //router.put("/api/cart/:cid/product/:pid", async (req, res) => {
-router.put("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"), cartController.updateProductQuantityInCart);
+router.put("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"), checkProductAndCart, cartController.updateProductQuantityInCart);
 
 // ruta para descontar la quantity del producto en el carrito
 //router.delete("/api/cart/:cid/product/:pid", async (req,res) => {
-router.delete("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"),cartController.deleteProductInCart);
+router.delete("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"), checkProductAndCart,cartController.deleteProductInCart);
 
 // ruta para eliminar todos los productos del carrito
 //router.delete("/api/cart/:cid", async (req,res) => {

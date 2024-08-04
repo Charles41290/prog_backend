@@ -34,16 +34,6 @@ const addProductToCart = async (req, res) => {
         //const cart = await cartManager.addProductToCart(parseInt(cid),parseInt(pid));
         //const cart = await cartDao.addProductToCart(cid,pid);
         const cart = await cartService.addProductToCart(cid,pid);
-        if(cart.cart == false){
-            const error = new Error(`Cart with id:${cid} Not Found`);
-            error.status = 404;
-            throw error;
-        }
-        if(cart.prod == false){
-            const error = new Error(`Product with id:${pid} Not Found`);
-            error.status = 404;
-            throw error;
-        }
         return res.json({status:200,payload:cart});
     } catch (error) {
         return res.json({status: error.status, response:error.message});
@@ -55,16 +45,6 @@ const updateProductQuantityInCart = async (req, res) => {
         const {pid,cid} = req.params;
         const {quantity} = req.body;
         const cart = await cartService.updateProductQuantityInCart(pid,cid,quantity)
-        if(cart.product == false){
-            const error = new Error(`Product with id:${pid} Not Found`);
-            error.status = 404;
-            throw error;
-        }
-        if (cart.cart == false) {
-            const error = new Error(`Cart with id:${cid} Not Found`);
-            error.status = 404;
-            throw error;
-        }
         return res.json({status:200,payload:cart});
     } catch (error) {
         return res.json({status: error.status, response:error.message})
@@ -75,16 +55,6 @@ const deleteProductInCart = async (req,res) => {
     try {
         const {cid,pid}=req.params;
         const cart = await cartService.deleteProductInCart(cid, pid);
-        if(cart.prod == false){
-            const error = new Error(`Product with id:${pid} Not Found`);
-            error.status = 404;
-            throw error;
-        }
-        if (cart.cart == false) {
-            const error = new Error(`Cart with id:${cid} Not Found`);
-            error.status = 404;
-            throw error;
-        }
         return res.json({status:200,payload:cart});
     } catch (error) {
         res.json({status:error.status,msg:error.message})

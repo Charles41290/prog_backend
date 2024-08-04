@@ -1,7 +1,8 @@
 
-import userDao from "../dao/mongoDao/user.dao.js";
+//import userDao from "../dao/mongoDao/user.dao.js";
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
 import { createToken, verifyToken } from "../utils/jwt.js";
+import userRepository from "../persistences/mongo/repositories/user.repository.js";
 
 const createUser = async (req, res) => {
     try {
@@ -35,7 +36,7 @@ const userLoginJWT = async (req,res) => {
         // obtengo email y password desde el body
         const {email, password} = req.body;
         // busco el usuario por email
-        const user = await userDao.getByEmail(email);
+        const user = await userRepository.getByEmail(email);
         // si el usuario NO existe o si la contraseña NO es válida
         if (!user || !isValidPassord(user, password)) {
             return res.json({status:401, msg:"Email o contraseña no válidos"});

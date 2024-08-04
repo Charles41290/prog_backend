@@ -1,5 +1,5 @@
 import Router from "express";
-import userDao from "../dao/mongoDao/user.dao.js";
+//import userDao from "../dao/mongoDao/user.dao.js";
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
 import passport from "passport";
 import { createToken, verifyToken } from "../utils/jwt.js";
@@ -17,7 +17,7 @@ router.post("/register", passport.authenticate("register") , sessionController.c
 // creamos un endpoint de login
 // usamos post porque estamos enviando info al server
 // delegamos la funcion de login a "login" strategy en passport.config
-    router.post("/login", passport.authenticate("login"), sessionController.userLogin);
+router.post("/login", passport.authenticate("login"), sessionController.userLogin);
 
 // ruta para acceder mediante google
 router.get("/login/google", 
@@ -29,7 +29,7 @@ router.get("/login/google",
 );
 
 // ruta para loguearse usando jwt
-router.post("/login/jwt", sessionController.userLoginJWT);
+router.post("/login/jwt",sessionController.userLoginJWT);
 
 // obtengo el usuario por token
 router.get("/current",passportCall("jwt"), authorization("user") , sessionController.getCurrentSession);

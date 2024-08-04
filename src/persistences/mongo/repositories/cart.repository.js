@@ -30,16 +30,18 @@ const addProductToCart = async (cid,pid) => {
 
     // buscamos por cid y pid -> si encuentra el producto en el carrito aumenta quantity en 1
     // findOneAndUpdate retorna el producto sin haber actualizado
-    const productInCart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$inc:{"products.$.quantity":1}})
+    const productInCart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$inc:{"products.$.quantity":1}}, {new:true})
     
     // si no encuentra el producto en el carrito lo agrega 
     if(!productInCart){
-        await cartModel.findOneAndUpdate({_id:cid},{$push:{products:{product:pid,quantity:1}}});
+        return await cartModel.findOneAndUpdate({_id:cid},{$push:{products:{product:pid,quantity:1}}}, {new: true});
     }
 
     // buscamos el cart actualizado y lo retornamos
-    const cartUpdated = await cartModel.findById(cid).populate("products.product");
-    return cartUpdated;
+    /* const cartUpdated = await cartModel.findById(cid).populate("products.product");
+    return cartUpdated; */
+
+    return productInCart;
 }
 
 // borro un producto en el cart, si quantity > 1 descuento en 1 este campo
@@ -54,24 +56,27 @@ const deleteProductInCart = async (cid,pid) => {
     if (!cart) {
         return {cart:false}
     }
-
     // buscamos el cart y el product -> en caso de no encontrar el product en el cart retorna null
-    cart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$inc:{"products.$.quantity":-1}});
+    cart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$inc:{"products.$.quantity":-1}}, {new:true});
     // si no existe el pid -> retorna prod:False
-    if (!cart) {return {prod:false}}
+    /* if (!cart) {return {prod:false}}
     const cartUpdated = await cartModel.findById(cid).populate("products.product")
-    return cartUpdated;
+    return cartUpdated; */
+
+    return cart;
 }
 
 const deleteAllProductsInCart = async (cid)=> {
     // buscamos el cart
-    const cart = await cartModel.findById(cid);
+    /* const cart = await cartModel.findById(cid);
     if (!cart) {
         return {cart:false}
-    }
-    await cartModel.findOneAndUpdate({_id:cid},{$set:{products:[]}});
-    const cartUpdated = cartModel.findById(cid);
-    return cartUpdated;
+    } */
+    const cart = await cartModel.findOneAndUpdate({_id:cid},{$set:{products:[]}}, {new:true});
+    //const cartUpdated = cartModel.findById(cid);
+    //return cartUpdated;
+
+    return cart;
 }
 
 const updateProductQuantityInCart = async (pid, cid, quantity) => {
@@ -81,11 +86,12 @@ const updateProductQuantityInCart = async (pid, cid, quantity) => {
     // si no existe el pid
     if(!product){return {product: false};}
     // buscamos el carrito
-    const cart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$set:{"products.$.quantity":quantity}});
+    const cart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$set:{"products.$.quantity":quantity}}, {new:true});
     // si no existe el cid
-    if(!cart){return {cart: false}}
+    /* if(!cart){return {cart: false}}
     const cartUpdated = await cartModel.findById(cid);
-    return cartUpdated;
+    return cartUpdated; */
+    return cart;
 }
 
 // actualizo el array de products en el carrito

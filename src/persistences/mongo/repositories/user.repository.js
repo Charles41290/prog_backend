@@ -1,4 +1,4 @@
-/* import { userModel } from "../models/user.model.js";
+import { userModel } from "../models/user.model.js";
 
 const getAll = async () => {
     const users = await userModel.find();
@@ -38,4 +38,3 @@ const deleteOne = async (id) => {
 }
 
 export default {getAll, getById, create, update, deleteOne, getByEmail}
- */
