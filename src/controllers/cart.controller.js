@@ -1,4 +1,6 @@
+import ticketRepository from "../persistences/mongo/repositories/ticket.repository.js";
 import cartService from "../services/cart.service.js";
+import ticketService from "../services/ticket.service.js";
 
 const getCartById = async (req, res) => {
     try {
@@ -91,9 +93,23 @@ const updateCartById = async (req, res) =>{
 
 const purchaseCart = async (req,res) => {
     try {
-        // llamar al servicio
-    } catch (error) {
+        const {cid} = req.params;
 
+        // ? verificamos la existencia del carrito
+        const cart = await cartService.getCartById(cid);
+        if(!cart) return res.json({status:400, msg:"Cart Not Found"});
+
+        // obtenemos el total del carrito 
+        const total = await cartService.purchaseCart(cid);
+
+        // creamos el ticket
+        const ticket = await ticketService.createTicket(req.user.email, total);
+
+        return res.json({status:200,payload:ticket});
+    } catch (error) {
+        //console.log("dentro del catch");
+        
+        //return res.json({status: error.status, response:error.message});
     }
 }
 

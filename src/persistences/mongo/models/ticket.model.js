@@ -25,8 +25,6 @@ const ticketSchema = mongoose.Schema({
     }
 });
 
-
-
 // mongoose.model recibe el nombre de la collection y el schema
 export const ticketModel = mongoose.model(ticketCollection,ticketSchema);
 

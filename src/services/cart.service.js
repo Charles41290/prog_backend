@@ -30,6 +30,36 @@ const updateCartById = async (query,data) =>{
     return await cartRepository.update(query,data);
 }
 
+// servicio para obtener el total del carrito
+// del total se descartan aquellos productos que no tengan stock suficiente
+const purchaseCart = async (cid) => {
+    // buscamos el carrito
+    const cart = await cartRepository.getByID(cid);
+
+    // verificamos los productos que tienen stock en disponibilidad
+    // voy a poder comprar aquellos productos que tengan stock
+    let total = 0;
+    const products = []; // almacenará los productos que no tienen stock suficiente
+
+    // recorremos cada uno de los products que esten en cart
+    // forof respeta el asincronismo
+    for (const product of cart.products) {
+        const prod = await productRepository.getProductById(product.product) // .product es el id del producto almacenado
+        // verifico si el estock del producto es mayor a la quantity del producto en el cart
+        if( prod.stock >= product.quantity ) {
+            total += prod.price * product.quantity;
+        } else { // si no hay estock suficiente 
+            products.push(product)
+        }
+    }
+
+    // actualizamos el cart con los products sin stock suficiente
+    await cartRepository.updateCartById(cid,products)
+
+    return total;
+
+}
+
 export default {
     getCartById,
     createCart,
@@ -37,5 +67,6 @@ export default {
     updateProductQuantityInCart,
     deleteProductInCart,
     deleteAllProductsInCart,
-    updateCartById
+    updateCartById,
+    purchaseCart
 }

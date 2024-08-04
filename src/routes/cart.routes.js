@@ -6,6 +6,7 @@ import passport from "passport";
 import { passportCall,authorization } from "../middlewares/passport.middleware.js";
 import cartController from "../controllers/cart.controller.js";
 import { checkProductAndCart } from "../middlewares/checkProductAndCart.middleware.js";
+import { isUserCart } from "../middlewares/isUserCart.middleware.js";
 
 const router = Router();
 
@@ -19,29 +20,26 @@ router.get("/api/cart", async (req, res) => {
 router.get("/api/cart/:cid", cartController.getCartById);
 
 // ruta para crear el carrito
-//router.post("/api/cart/", async (req, res) => {
 router.post("/api/cart/", passportCall("jwt"),authorization("user"), cartController.createCart);
 
 // ruta para agregar productos al carrito ya creado
-//router.post("/api/cart/:cid/product/:pid", async (req, res) => {
-router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization("user"), checkProductAndCart, cartController.addProductToCart);
+// isUserCart -> verificamos que el cart pertenezca al user
+router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization("user"), checkProductAndCart, isUserCart ,cartController.addProductToCart);
+
+//router.post("/:cid/product/:pid", passportCall("jwt"), authorization("user"), checkProductAndCart, isUserCart, cartsControllers.addProductToCart);
 
 // ruta para modificar la cantidad de un producto que ya esté en carrito
-//router.put("/api/cart/:cid/product/:pid", async (req, res) => {
 router.put("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"), checkProductAndCart, cartController.updateProductQuantityInCart);
 
 // ruta para descontar la quantity del producto en el carrito
-//router.delete("/api/cart/:cid/product/:pid", async (req,res) => {
 router.delete("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"), checkProductAndCart,cartController.deleteProductInCart);
 
 // ruta para eliminar todos los productos del carrito
-//router.delete("/api/cart/:cid", async (req,res) => {
 router.delete("/api/cart/:cid", passportCall("jwt"), authorization("user"), cartController.deleteAllProductsInCart);
 
 // ruta para actualizar el carrito con un array de productos
 // TODO 
-//router.put("/api/cart/:cid", async (req, res) =>{
 router.put("/api/cart/:cid", passportCall("jwt"), authorization("user"), cartController.updateCartById);
 
-router.get("/api/cart/:cid/purchase");
+router.get("/api/cart/:cid/purchase", passportCall("jwt"), authorization("user"), cartController.purchaseCart);
 export default router;

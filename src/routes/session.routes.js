@@ -13,12 +13,13 @@ const router = Router();
 // utilizo post ya que vamos a recibir datos del usuario
 // configuramos el passport.authenticate con la estrategia register definida en
 // passport.config.js -> en este archivo esta toda la lógica para registrar el nuevo usuario
-router.post("/register", passport.authenticate("register") , sessionController.createUser);
+//router.post("/register", passport.authenticate("register") , sessionController.createUser);
+router.post("/register", passportCall("register"), sessionController.createUser);
 
 // creamos un endpoint de login
 // usamos post porque estamos enviando info al server
 // delegamos la funcion de login a "login" strategy en passport.config
-router.post("/login", passport.authenticate("login"), sessionController.userLogin);
+router.post("/login", passportCall("login"), sessionController.userLogin);
 
 // ruta para acceder mediante google
 router.get("/login/google", 

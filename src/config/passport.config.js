@@ -5,6 +5,7 @@ import jwt from "passport-jwt"
 import userRepository from "../persistences/mongo/repositories/user.repository.js";
 import google from "passport-google-oauth20";
 import { createHash, isValidPassord } from "../utils/hashPassword.js";
+import cartRepository from "../persistences/mongo/repositories/cart.repository.js";
 
 //configuramos la estrategia local,de google y passport-jwt
 const LocalStrategy = local.Strategy;
@@ -44,7 +45,10 @@ const initializePassword = () => {
                     // implementación de la estrategia
                     // false -> indica que la autenticación falló 
                     if(user) return done(null,false,{msg:"El usuario ya existe"});
-
+                    
+                    //antes de crear un usuario vamos a crear un Cart
+                    const cart = await cartRepository.create();
+                    
                     //generamos un nuevo usuario
                     const newUser = {
                         first_name, 
@@ -52,10 +56,12 @@ const initializePassword = () => {
                         email,
                         age,
                         password: createHash(password),
-                        role
+                        role,
+                        cart: cart._id
                     }
                     // si el usuario no existe lo creo y lo retorno mediante done
                     const createdUser = await userRepository.create(newUser);
+                    
                     // null indica que no ha ocurrido error
                     return done(null, createdUser);
                 } catch (error) {
