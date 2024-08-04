@@ -61,12 +61,12 @@ const getCurrentSession = (req, res) => {
         //const {token} = req.body;
         // en lugar de recibir el token desde el body lo obtenemos desde una cookie
         const token = req.cookies.token;
-
+        const user = userResponseDto(req.user);
         const checkToken = verifyToken(token);
         if(!checkToken){
             return res.json({status:403, msg:"Token inválido"});
         }
-        res.json({status:201, payload:checkToken});
+        res.json({status:201, payload:user});
     } catch (error) {
         console.log(error);
         res.json({status:500, msg:"Error interno en el servidor"});

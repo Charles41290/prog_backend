@@ -33,7 +33,8 @@ router.get("/login/google",
 router.post("/login/jwt",sessionController.userLoginJWT);
 
 // obtengo el usuario por token
-router.get("/current",passportCall("jwt"), authorization("user") , sessionController.getCurrentSession);
+//router.get("/current",passportCall("jwt"), authorization("user") , sessionController.getCurrentSession);
+router.get("/current",passportCall("jwt"), sessionController.getCurrentSession);
 
 // ruta para desloguearse
 router.get("/logout", sessionController.logout);

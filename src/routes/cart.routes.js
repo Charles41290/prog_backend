@@ -41,6 +41,7 @@ router.delete("/api/cart/:cid", passportCall("jwt"), authorization("user"), cart
 // ruta para actualizar el carrito con un array de productos
 // TODO 
 //router.put("/api/cart/:cid", async (req, res) =>{
-router.put("/api/cart/:cid", passportCall("jwt"), authorization("user"), cartController.updateCartById)
+router.put("/api/cart/:cid", passportCall("jwt"), authorization("user"), cartController.updateCartById);
 
+router.get("/api/cart/:cid/purchase");
 export default router;

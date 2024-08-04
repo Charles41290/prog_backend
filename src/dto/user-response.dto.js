@@ -6,7 +6,6 @@ export const userResponseDto = (user) => {
     }
 }
 
-
 /* first_name
 "Fredy"
 last_name

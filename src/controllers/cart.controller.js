@@ -89,6 +89,14 @@ const updateCartById = async (req, res) =>{
     }
 }
 
+const purchaseCart = async (req,res) => {
+    try {
+        // llamar al servicio
+    } catch (error) {
+
+    }
+}
+
 export default {
     getCartById,
     createCart,
@@ -96,5 +104,6 @@ export default {
     updateProductQuantityInCart,
     deleteProductInCart,
     deleteAllProductsInCart,
-    updateCartById
+    updateCartById,
+    purchaseCart
 }
