@@ -1,8 +1,5 @@
-//import cartDao from "../dao/mongoDao/cart.dao.js";
-//import productDao from "../dao/mongoDao/product.dao.js";
 import cartRepository from "../persistences/mongo/repositories/cart.repository.js";
 import productRepository from "../persistences/mongo/repositories/product.repository.js";
-
 
 const getCartById = async (id) => {
     return await cartRepository.getByID(id)

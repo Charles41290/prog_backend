@@ -18,15 +18,6 @@ const addProductToCart = async (cid,pid) => {
     // verificamos la existencia del producto y del carrito por individual
     // buscamos el producto
     //const product = await productDao.getById(pid);
-    const product = productModel.findById(pid)
-    if (!product) {
-        return {prod:false}
-    }
-    // buscamos el cart
-    const cart = await cartModel.findById(cid);
-    if (!cart) {
-        return {cart:false}
-    }
 
     // buscamos por cid y pid -> si encuentra el producto en el carrito aumenta quantity en 1
     // findOneAndUpdate retorna el producto sin haber actualizado
@@ -47,22 +38,15 @@ const addProductToCart = async (cid,pid) => {
 // borro un producto en el cart, si quantity > 1 descuento en 1 este campo
 const deleteProductInCart = async (cid,pid) => {
     //const product = await productDao.getById(pid);
-    const product = await productModel.findById(pid);
-    if (!product) {
-        return {prod:false}
-    }
-
-    let cart = await cartModel.findById(cid);
-    if (!cart) {
-        return {cart:false}
-    }
     // buscamos el cart y el product -> en caso de no encontrar el product en el cart retorna null
-    cart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$inc:{"products.$.quantity":-1}}, {new:true});
-    // si no existe el pid -> retorna prod:False
-    /* if (!cart) {return {prod:false}}
-    const cartUpdated = await cartModel.findById(cid).populate("products.product")
-    return cartUpdated; */
-
+    // si no existe el pid -> retorna null
+    const cart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$inc:{"products.$.quantity":-1}}, {new:true});
+    // si el producto no está en el cart -> cart == null
+    if (!cart) {
+        const error = new Error(`Product with id:${pid} Not Found in Cart`);
+        error.status = 404;
+        throw error;
+    }
     return cart;
 }
 
@@ -80,17 +64,13 @@ const deleteAllProductsInCart = async (cid)=> {
 }
 
 const updateProductQuantityInCart = async (pid, cid, quantity) => {
-    // verificamos la existencia del producto
-    // buscamos el producto
-    const product = await productModel.findById(pid);
-    // si no existe el pid
-    if(!product){return {product: false};}
-    // buscamos el carrito
     const cart = await cartModel.findOneAndUpdate({_id:cid, "products.product":pid},{$set:{"products.$.quantity":quantity}}, {new:true});
-    // si no existe el cid
-    /* if(!cart){return {cart: false}}
-    const cartUpdated = await cartModel.findById(cid);
-    return cartUpdated; */
+    // si no existe el pid -> cart == null
+    if (!cart) {
+        const error = new Error(`Product with id:${pid} Not Found in Cart`);
+        error.status = 404;
+        throw error;
+    }
     return cart;
 }
 
