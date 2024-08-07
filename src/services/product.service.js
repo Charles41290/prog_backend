@@ -1,5 +1,6 @@
 import { productDto } from "../dto/product-response.dto.js";
 import productRepository from "../persistences/mongo/repositories/product.repository.js";
+import error from "../errors/customsErrors.js"
 
 const getAllProducts = async (query, options) => {
     const products = await productRepository.getAllProducts(query, options);
@@ -8,6 +9,8 @@ const getAllProducts = async (query, options) => {
 
 const getProductById = async (id) => {
     const productData = await productRepository.getProductById(id);
+    //if(!productData) throw new Error(`Product id ${id} not found`);
+    if(!productData) throw error.notFoundError(`Product id ${id} not found`);
     const product = productDto(productData);
     return product;
 }

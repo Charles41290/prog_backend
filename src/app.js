@@ -10,6 +10,7 @@ import passport from "passport";
 import initializePassword from "./config/passport.config.js"
 import cookieParser from "cookie-parser";
 import env from "./config/env.config.js"
+import { errorHandler } from "./errors/errorHandler.js";
 
 // establecemos conexión con mongoDB
 connectMongoDb();
@@ -55,5 +56,7 @@ app.set("view engine", "handlebars"); // indico el motor a utilizar
 
 app.use("/", routes);
 app.use("/",viewRoutes);
+
+app.use(errorHandler);
 
 //console.log(env);

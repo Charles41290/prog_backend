@@ -34,7 +34,7 @@ const getAllProducts = async (req, res) => {
     }
 }
 
-const getProductById = async (req, res) => {
+const getProductById = async (req, res, next) => { // agregamos el param next
     try {
         // tengo que obtener del request el param/query pid
         const {pid} = req.params;
@@ -49,7 +49,8 @@ const getProductById = async (req, res) => {
         }
         return res.json({status:200, response: product} )
     } catch (error) {
-        return res.json({status: error.status, response:error.message})
+        //return res.json({status: error.status, response:error.message})
+        next(error); // ejecuta el errorHandle configurado en el app.js
     }
 }
 
