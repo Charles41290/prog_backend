@@ -23,9 +23,6 @@ export const passportCall = (strategy) => {
         if (error) return next(error);
         if (!user) return res.status(401).json({ status: "error", msg: info.message ? info.message : info.toString() });
         
-        console.log("passport call "+user.cart);
-        console.log("passport call "+req.user);
-
         req.user = user;
   
         next();

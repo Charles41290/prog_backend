@@ -22,9 +22,25 @@ const forbiddenError = (msg = "Forbbiden" ) => {
     return error
 }
 
+const missingInfo = () => {
+    const fields = {
+        title:"text",
+        description:"text",
+        price:"number",
+        code:"text",
+        stock:"number",
+        category:"text"
+    }
+    const msg = 'Bad Request!.These fields are required'+JSON.stringify(fields);
+    const error = new Error(msg);
+    error.status = 400;
+    return error
+}
+
 export default {
     notFoundError,
     badRequestError,
     unauthorizedError,
-    forbiddenError
+    forbiddenError,
+    missingInfo
 }

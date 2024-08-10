@@ -1,5 +1,6 @@
 //import productDao from "../dao/mongoDao/product.dao.js";
 import productService from "../services/product.service.js";
+import err from "../errors/customsErrors.js"
 
 const getAllProducts = async (req, res) => {
     try {
@@ -42,11 +43,11 @@ const getProductById = async (req, res, next) => { // agregamos el param next
         //const product =  await productDao.getById(pid);
         const product =  await productService.getProductById(pid);
         // si el product NO existe me lanza un error que toma el catch
-        if (!product) {
+        /* if (!product) {
             const error = new Error("Product Not Found");
             error.status = 404;
             throw error;
-        }
+        } */
         return res.json({status:200, response: product} )
     } catch (error) {
         //return res.json({status: error.status, response:error.message})
@@ -54,23 +55,17 @@ const getProductById = async (req, res, next) => { // agregamos el param next
     }
 }
 
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
     try {
         const product = req.body;
-        //const newProduct  = await productManager.addProduct(product);
-        //const newProduct  = await productDao.create(product);
         const newProduct  = await productService.createProduct(product);
-        if (newProduct) {
-            return res.json({status:201, response: newProduct});
-        }
-        const error = new Error("Todos los campos son obligatorios/ Codigo de producto ya existe");
-        error.status = 400;
-        throw error;
+        //if(!newProduct) throw error.missingInfo(msg);
+        return res.json({status:201, response: newProduct});
     } catch (error) {
-        return res.json({
-            status: error.status,
-            response: error.message
-        });
+        //error = {...error,status:400}
+        //error = {status:400,...error}
+        error = err.missingInfo();
+        next(error);
     }
 }
 

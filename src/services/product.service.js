@@ -17,6 +17,7 @@ const getProductById = async (id) => {
 
 const createProduct = async (data) => {
     const product = await productRepository.createProduct(data);
+    if(!product) throw error.missingInfo(msg);
     return product;
 }
 
