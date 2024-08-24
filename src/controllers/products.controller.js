@@ -1,6 +1,7 @@
 //import productDao from "../dao/mongoDao/product.dao.js";
 import productService from "../services/product.service.js";
 import err from "../errors/customsErrors.js"
+import { logger } from "../utils/logger.js";
 
 const getAllProducts = async (req, res) => {
     try {
@@ -31,7 +32,7 @@ const getAllProducts = async (req, res) => {
         const products = await productService.getAllProducts({}, options);
         return res.json({status:200, response: products} )
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`);
     }
 }
 
@@ -52,7 +53,7 @@ const getProductById = async (req, res, next) => { // agregamos el param next
     } catch (error) {
         //return res.json({status: error.status, response:error.message})
         next(error); // ejecuta el errorHandle configurado en el app.js
-    }
+    } 
 }
 
 const createProduct = async (req, res, next) => {
@@ -83,7 +84,7 @@ const updateProduct =  async (req, res) => {
         error.status = 404;
         throw error;
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`)
         return res.json({
             status: error.status,
             response: error.message

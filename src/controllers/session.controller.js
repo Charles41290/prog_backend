@@ -4,12 +4,13 @@ import { createHash, isValidPassord } from "../utils/hashPassword.js";
 import { createToken, verifyToken } from "../utils/jwt.js";
 import userRepository from "../persistences/mongo/repositories/user.repository.js";
 import { userResponseDto } from "../dto/user-response.dto.js";
+import { logger } from "../utils/logger.js";
 
 const createUser = async (req, res) => {
     try {
         res.json({status:201, payload:"Usuario creado"})  
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`);
         res.json({status:500, msg:"Error interno en el servidor"})
     }
 }
@@ -18,7 +19,7 @@ const userLogin = async (req, res) => {
     try {
         res.json({status:201, payload:req.user})
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`);
         res.json({status:500, msg:"Error interno en el servidor"});
     }
 }
@@ -27,7 +28,7 @@ const loginGoogle = async (req, res) => {
     try {
         res.json({status:201, payload:req.user})
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`);
         res.json({status:500, msg:"Error interno en el servidor"});
     }
 }
@@ -51,7 +52,7 @@ const userLoginJWT = async (req,res) => {
         const userDto = userResponseDto(user);
         res.json({status:201, payload:userDto,token});
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`);
         res.json({status:500, msg:"Error interno en el servidor"});
     }
 }
@@ -68,7 +69,7 @@ const getCurrentSession = (req, res) => {
         }
         res.json({status:201, payload:user});
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`);
         res.json({status:500, msg:"Error interno en el servidor"});
     }
 }
@@ -78,7 +79,7 @@ const logout = async (req, res) => {
         req.session.destroy();
         res.json({status:200, payload:"Sesión cerrada con éxito"})
     } catch (error) {
-        console.log(error);
+        logger.error(`${error}`);
         res.json({status:500, msg:"Error interno en el servidor"});
     }
 }

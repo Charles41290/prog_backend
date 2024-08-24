@@ -11,6 +11,7 @@ import initializePassword from "./config/passport.config.js"
 import cookieParser from "cookie-parser";
 import env from "./config/env.config.js"
 import { errorHandler } from "./errors/errorHandler.js";
+import { logger } from "./utils/logger.js";
 
 // establecemos conexión con mongoDB
 connectMongoDb();
@@ -21,10 +22,12 @@ const app = express();
 // para inicializar la app de express necesito config
 // puerto
 const port = 8080;
-const ready = console.log("server listening on port: "+port);
 
 // para inicializar el servidor
-app.listen(port, ready);
+//app.listen(port, ready2);
+app.listen(port, () => {
+    logger.info(`server listening on port: ${port}`);
+});
 
 // configuro el server con otras funcionalidades (Middleware)
 app.use(express.json()); // para devolver archivos json
@@ -56,7 +59,12 @@ app.set("view engine", "handlebars"); // indico el motor a utilizar
 
 app.use("/", routes);
 app.use("/",viewRoutes);
+app.get("/loggerTest", (req, res) => {
+    logger.info("Prueba de logger.info");
+    logger.warn("Prueba de login.warn");
+    logger.error("Prueba de login.error");
+    logger.http("Prueba de login.http");
+    return res.json({status:200, msg:"Todas las pruebas fueron exitosas"})
+})
 
 app.use(errorHandler);
-
-//console.log(env);

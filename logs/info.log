@@ -1,0 +1,218 @@
+2024-08-24 16:50:45 info: Conectados a Mongo DB
+2024-08-24 16:50:45 info: server listening on port: 8080
+2024-08-24 16:50:45 error: 8080 Not Found 
+2024-08-24 16:50:49 info: Conectados a Mongo DB
+2024-08-24 16:50:49 info: server listening on port: 8080
+2024-08-24 16:50:49 error: 8080 Not Found 
+2024-08-24 16:50:53 info: Conectados a Mongo DB
+2024-08-24 16:50:53 info: server listening on port: 8080
+2024-08-24 16:50:53 error: 8080 Not Found 
+2024-08-24 16:50:59 info: Conectados a Mongo DB
+2024-08-24 16:50:59 info: server listening on port: 8080
+2024-08-24 16:50:59 error: 8080 Not Found 
+2024-08-24 16:51:01 info: Conectados a Mongo DB
+2024-08-24 16:51:01 info: server listening on port: 8080
+2024-08-24 16:51:01 error: 8080 Not Found 
+2024-08-24 16:51:03 info: Conectados a Mongo DB
+2024-08-24 16:51:03 info: server listening on port: 8080
+2024-08-24 16:51:03 error: 8080 Not Found 
+2024-08-24 16:51:04 info: Conectados a Mongo DB
+2024-08-24 16:51:04 info: server listening on port: 8080
+2024-08-24 16:51:04 error: 8080 Not Found 
+2024-08-24 16:51:07 info: Conectados a Mongo DB
+2024-08-24 16:51:07 info: server listening on port: 8080
+2024-08-24 16:51:07 error: 8080 Not Found 
+2024-08-24 16:51:10 info: Conectados a Mongo DB
+2024-08-24 16:51:10 info: server listening on port: 8080
+2024-08-24 16:51:10 error: 8080 Not Found 
+2024-08-24 16:51:13 info: Conectados a Mongo DB
+2024-08-24 16:51:13 info: server listening on port: 8080
+2024-08-24 16:51:13 error: 8080 Not Found 
+2024-08-24 16:51:37 error: Product id 665b3850823175c9a2b4b456 not found
+2024-08-24 16:51:57 info: Conectados a Mongo DB
+2024-08-24 16:51:57 info: server listening on port: 8080
+2024-08-24 16:53:33 error: Cast to ObjectId failed for value "665b3850823175c9a2b4b45" (type string) at path "_id" for model "products"
+2024-08-24 16:55:45 info: Conectados a Mongo DB
+2024-08-24 16:55:45 info: server listening on port: 8080
+2024-08-24 16:55:53 info: Conectados a Mongo DB
+2024-08-24 16:55:53 info: server listening on port: 8080
+2024-08-24 16:55:57 info: Conectados a Mongo DB
+2024-08-24 16:55:57 info: server listening on port: 8080
+2024-08-24 16:56:04 info: Conectados a Mongo DB
+2024-08-24 16:56:04 info: server listening on port: 8080
+2024-08-24 16:56:06 info: Conectados a Mongo DB
+2024-08-24 16:56:06 info: server listening on port: 8080
+2024-08-24 16:56:08 info: Conectados a Mongo DB
+2024-08-24 16:56:08 info: server listening on port: 8080
+2024-08-24 16:56:17 info: Conectados a Mongo DB
+2024-08-24 16:56:17 info: server listening on port: 8080
+2024-08-24 16:56:23 info: Conectados a Mongo DB
+2024-08-24 16:56:23 info: server listening on port: 8080
+2024-08-24 16:56:24 info: Conectados a Mongo DB
+2024-08-24 16:56:24 info: server listening on port: 8080
+2024-08-24 16:56:27 info: Conectados a Mongo DB
+2024-08-24 16:56:27 info: server listening on port: 8080
+2024-08-24 16:56:31 info: Conectados a Mongo DB
+2024-08-24 16:56:31 info: server listening on port: 8080
+2024-08-24 16:56:35 info: Conectados a Mongo DB
+2024-08-24 16:56:35 info: server listening on port: 8080
+2024-08-24 16:56:39 info: Conectados a Mongo DB
+2024-08-24 16:56:39 info: server listening on port: 8080
+2024-08-24 16:56:43 error: Cast to ObjectId failed for value "665b3850823175c9a2b4b45" (type string) at path "_id" for model "products"
+2024-08-24 16:58:49 info: Conectados a Mongo DB
+2024-08-24 16:58:49 info: server listening on port: 8080
+2024-08-24 16:58:52 info: Conectados a Mongo DB
+2024-08-24 16:58:52 info: server listening on port: 8080
+2024-08-24 16:59:00 info: Conectados a Mongo DB
+2024-08-24 16:59:00 info: server listening on port: 8080
+2024-08-24 16:59:06 info: Conectados a Mongo DB
+2024-08-24 16:59:06 info: server listening on port: 8080
+2024-08-24 17:37:51 info: Conectados a Mongo DB
+2024-08-24 17:37:51 info: server listening on port: 8080
+2024-08-24 19:20:38 info: Conectados a Mongo DB
+2024-08-24 19:20:38 info: server listening on port: 8080
+2024-08-24 19:21:40 info: Prueba de logger exitosa
+2024-08-24 19:22:19 info: Conectados a Mongo DB
+2024-08-24 19:22:19 info: server listening on port: 8080
+2024-08-24 19:22:25 info: Conectados a Mongo DB
+2024-08-24 19:22:25 info: server listening on port: 8080
+2024-08-24 19:23:08 info: Conectados a Mongo DB
+2024-08-24 19:23:08 info: server listening on port: 8080
+2024-08-24 19:23:17 info: Conectados a Mongo DB
+2024-08-24 19:23:17 info: server listening on port: 8080
+2024-08-24 19:23:23 info: Conectados a Mongo DB
+2024-08-24 19:23:23 info: server listening on port: 8080
+2024-08-24 19:23:25 info: Conectados a Mongo DB
+2024-08-24 19:23:25 info: server listening on port: 8080
+2024-08-24 19:23:26 info: Conectados a Mongo DB
+2024-08-24 19:23:26 info: server listening on port: 8080
+2024-08-24 19:23:34 info: Conectados a Mongo DB
+2024-08-24 19:23:34 info: server listening on port: 8080
+2024-08-24 19:23:44 info: Conectados a Mongo DB
+2024-08-24 19:23:44 info: server listening on port: 8080
+2024-08-24 19:23:47 info: Conectados a Mongo DB
+2024-08-24 19:23:47 info: server listening on port: 8080
+2024-08-24 19:23:56 info: Conectados a Mongo DB
+2024-08-24 19:23:56 info: server listening on port: 8080
+2024-08-24 19:23:58 info: Conectados a Mongo DB
+2024-08-24 19:23:58 info: server listening on port: 8080
+2024-08-24 19:24:02 info: Conectados a Mongo DB
+2024-08-24 19:24:02 info: server listening on port: 8080
+2024-08-24 19:24:04 info: Prueba de logger.info
+2024-08-24 19:24:04 warn: Prueba de login.warn
+2024-08-24 19:24:04 error: Prueba de login.error
+2024-08-24 19:24:59 info: Conectados a Mongo DB
+2024-08-24 19:24:59 info: server listening on port: 8080
+2024-08-24 19:25:01 info: Conectados a Mongo DB
+2024-08-24 19:25:01 info: server listening on port: 8080
+2024-08-24 19:25:04 info: Conectados a Mongo DB
+2024-08-24 19:25:04 info: server listening on port: 8080
+2024-08-24 19:25:06 info: Conectados a Mongo DB
+2024-08-24 19:25:06 info: server listening on port: 8080
+2024-08-24 19:25:10 info: Conectados a Mongo DB
+2024-08-24 19:25:10 info: server listening on port: 8080
+2024-08-24 19:25:14 info: Conectados a Mongo DB
+2024-08-24 19:25:14 info: server listening on port: 8080
+2024-08-24 19:25:18 info: Conectados a Mongo DB
+2024-08-24 19:25:18 info: server listening on port: 8080
+2024-08-24 19:25:21 info: Prueba de logger.info
+2024-08-24 19:25:21 warn: Prueba de login.warn
+2024-08-24 19:25:21 error: Prueba de login.error
+2024-08-24 19:26:26 info: Conectados a Mongo DB
+2024-08-24 19:26:26 info: server listening on port: 8080
+2024-08-24 19:26:33 info: Conectados a Mongo DB
+2024-08-24 19:26:33 info: server listening on port: 8080
+2024-08-24 19:26:44 info: Conectados a Mongo DB
+2024-08-24 19:26:44 info: server listening on port: 8080
+2024-08-24 19:26:58 info: Conectados a Mongo DB
+2024-08-24 19:26:58 info: server listening on port: 8080
+2024-08-24 19:27:00 info: Conectados a Mongo DB
+2024-08-24 19:27:00 info: server listening on port: 8080
+2024-08-24 19:27:05 info: Conectados a Mongo DB
+2024-08-24 19:27:05 info: server listening on port: 8080
+2024-08-24 19:27:09 info: Conectados a Mongo DB
+2024-08-24 19:27:09 info: server listening on port: 8080
+2024-08-24 19:27:11 info: Conectados a Mongo DB
+2024-08-24 19:27:11 info: server listening on port: 8080
+2024-08-24 19:27:14 info: Conectados a Mongo DB
+2024-08-24 19:27:14 info: server listening on port: 8080
+2024-08-24 19:27:27 info: Conectados a Mongo DB
+2024-08-24 19:27:27 info: server listening on port: 8080
+2024-08-24 19:27:28 info: Conectados a Mongo DB
+2024-08-24 19:27:28 info: server listening on port: 8080
+2024-08-24 19:27:32 info: Conectados a Mongo DB
+2024-08-24 19:27:32 info: server listening on port: 8080
+2024-08-24 19:27:34 info: Conectados a Mongo DB
+2024-08-24 19:27:34 info: server listening on port: 8080
+2024-08-24 19:27:41 info: Conectados a Mongo DB
+2024-08-24 19:27:41 info: server listening on port: 8080
+2024-08-24 19:27:56 info: Conectados a Mongo DB
+2024-08-24 19:27:56 info: server listening on port: 8080
+2024-08-24 19:27:58 info: Conectados a Mongo DB
+2024-08-24 19:27:58 info: server listening on port: 8080
+2024-08-24 19:27:59 info: Conectados a Mongo DB
+2024-08-24 19:27:59 info: server listening on port: 8080
+2024-08-24 19:28:07 info: Conectados a Mongo DB
+2024-08-24 19:28:07 info: server listening on port: 8080
+2024-08-24 19:28:12 info: Conectados a Mongo DB
+2024-08-24 19:28:12 info: server listening on port: 8080
+2024-08-24 19:29:53 info: Conectados a Mongo DB
+2024-08-24 19:29:53 info: server listening on port: 8080
+2024-08-24 19:29:55 info: Conectados a Mongo DB
+2024-08-24 19:29:55 info: server listening on port: 8080
+2024-08-24 19:29:58 info: Conectados a Mongo DB
+2024-08-24 19:29:58 info: server listening on port: 8080
+2024-08-24 19:30:03 info: Conectados a Mongo DB
+2024-08-24 19:30:03 info: server listening on port: 8080
+2024-08-24 19:30:13 info: Conectados a Mongo DB
+2024-08-24 19:30:13 info: server listening on port: 8080
+2024-08-24 19:30:15 info: Conectados a Mongo DB
+2024-08-24 19:30:15 info: server listening on port: 8080
+2024-08-24 19:30:16 info: Conectados a Mongo DB
+2024-08-24 19:30:16 info: server listening on port: 8080
+2024-08-24 19:30:20 info: Conectados a Mongo DB
+2024-08-24 19:30:20 info: server listening on port: 8080
+2024-08-24 19:36:42 info: Conectados a Mongo DB
+2024-08-24 19:36:42 info: server listening on port: 8080
+2024-08-24 19:36:44 info: Conectados a Mongo DB
+2024-08-24 19:36:44 info: server listening on port: 8080
+2024-08-24 19:40:58 info: Conectados a Mongo DB
+2024-08-24 19:40:58 info: server listening on port: 8080
+2024-08-24 19:40:59 info: Conectados a Mongo DB
+2024-08-24 19:40:59 info: server listening on port: 8080
+2024-08-24 19:41:04 info: Conectados a Mongo DB
+2024-08-24 19:41:04 info: server listening on port: 8080
+2024-08-24 19:41:05 info: Conectados a Mongo DB
+2024-08-24 19:41:05 info: server listening on port: 8080
+2024-08-24 19:41:10 info: Conectados a Mongo DB
+2024-08-24 19:41:10 info: server listening on port: 8080
+2024-08-24 19:41:12 info: Conectados a Mongo DB
+2024-08-24 19:41:12 info: server listening on port: 8080
+2024-08-24 19:41:13 info: Conectados a Mongo DB
+2024-08-24 19:41:13 info: server listening on port: 8080
+2024-08-24 19:41:17 info: Conectados a Mongo DB
+2024-08-24 19:41:17 info: server listening on port: 8080
+2024-08-24 19:41:21 info: Conectados a Mongo DB
+2024-08-24 19:41:21 info: server listening on port: 8080
+2024-08-24 19:41:29 error: CastError: Cast to ObjectId failed for value "66af9c6c7f4296cfb8907a1" (type string) at path "_id" for model "products"
+2024-08-24 19:41:53 info: Conectados a Mongo DB
+2024-08-24 19:41:53 info: server listening on port: 8080
+2024-08-24 19:42:48 info: Prueba de logger.info
+2024-08-24 19:42:48 warn: Prueba de login.warn
+2024-08-24 19:42:48 error: Prueba de login.error
+2024-08-24 19:43:34 info: Conectados a Mongo DB
+2024-08-24 19:43:34 info: server listening on port: 8080
+2024-08-24 19:43:37 info: Conectados a Mongo DB
+2024-08-24 19:43:37 info: server listening on port: 8080
+2024-08-24 19:43:41 info: Conectados a Mongo DB
+2024-08-24 19:43:41 info: server listening on port: 8080
+2024-08-24 19:43:56 info: Conectados a Mongo DB
+2024-08-24 19:43:56 info: server listening on port: 8080
+2024-08-24 19:44:01 info: Conectados a Mongo DB
+2024-08-24 19:44:01 info: server listening on port: 8080
+2024-08-24 19:44:07 info: Conectados a Mongo DB
+2024-08-24 19:44:07 info: server listening on port: 8080
+2024-08-24 19:44:13 info: Conectados a Mongo DB
+2024-08-24 19:44:13 info: server listening on port: 8080
+2024-08-24 19:44:21 info: Conectados a Mongo DB
+2024-08-24 19:44:21 info: server listening on port: 8080

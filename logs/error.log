@@ -1,0 +1,7 @@
+2024-08-24 16:51:37 error: Product id 665b3850823175c9a2b4b456 not found
+2024-08-24 16:53:33 error: Cast to ObjectId failed for value "665b3850823175c9a2b4b45" (type string) at path "_id" for model "products"
+2024-08-24 16:56:43 error: Cast to ObjectId failed for value "665b3850823175c9a2b4b45" (type string) at path "_id" for model "products"
+2024-08-24 19:24:04 error: Prueba de login.error
+2024-08-24 19:25:21 error: Prueba de login.error
+2024-08-24 19:41:29 error: CastError: Cast to ObjectId failed for value "66af9c6c7f4296cfb8907a1" (type string) at path "_id" for model "products"
+2024-08-24 19:42:48 error: Prueba de login.error
