@@ -1,3 +1,4 @@
+import customsErrors from "../errors/customsErrors.js";
 import cartRepository from "../persistences/mongo/repositories/cart.repository.js";
 import productRepository from "../persistences/mongo/repositories/product.repository.js";
 
@@ -9,7 +10,11 @@ const createCart = async () => {
     return await cartRepository.create();
 }
 
-const addProductToCart = async (cid,pid) => {
+const addProductToCart = async (cid,pid, user) => {
+    const product = await productRepository.getProductById(pid);
+    if (user.role === "premium" && product.owner === user._id) {
+        throw customsErrors.unauthorizedError("Usuario no autorizado");
+    }
     return await cartRepository.addProductToCart(cid, pid);
 }
 

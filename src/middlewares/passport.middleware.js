@@ -1,5 +1,6 @@
 import { request, response } from "express";
 import passport from "passport";
+import customsErrors from "../errors/customsErrors.js";
 
 // recibe la estrategia que hayamos definido en passport.config
 /* export const passportCall = (strategy) => {
@@ -31,11 +32,18 @@ export const passportCall = (strategy) => {
   };
 
 // creamos una funcion para verificar el role
-export const authorization = (role) => {
+export const authorization = (roles) => {
     return async (req = request, res = response, next) => {
         // verificamos si existe un usuario en la sesion
-        if(!req.user) return res.json({status:401, msg:"No autorizado"});
-        if(req.user.role !== role) return res.json({status:403, msg:"No tienes permiso"});
-        next();
-    }
+        // if(!req.user) return res.json({status:401, msg:"No autorizado"});
+        // if(req.user.role !== role) return res.json({status:403, msg:"No tienes permiso"});
+        try {
+          if(!req.user) throw customsErrors.notFoundError("User not found");
+          const roleAuthorized = roles.includes(req.user.role);
+          if(!roleAuthorized) throw customsErrors.unauthorizedError("Usuario no autorizado");
+          next();
+        } catch (error) {
+          next(error);
+        }
+    }  
 }

@@ -59,7 +59,7 @@ const getProductById = async (req, res, next) => { // agregamos el param next
 const createProduct = async (req, res, next) => {
     try {
         const product = req.body;
-        const newProduct  = await productService.createProduct(product);
+        const newProduct  = await productService.createProduct(product, req.user);
         //if(!newProduct) throw error.missingInfo(msg);
         return res.json({status:201, response: newProduct});
     } catch (error) {
@@ -92,23 +92,18 @@ const updateProduct =  async (req, res) => {
     }
 }
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res, next) => {
     try {
         const {pid} = req.params;
-        //const deletedProduct = await productManager.deleteProduct(parseInt(pid));
-        //const deletedProduct = await productDao.deleteOne(pid);
-        const deletedProduct = await productService.deleteProduct(pid);
+        const deletedProduct = await productService.deleteProduct(pid, req.user);
         if (deletedProduct) {
-            return res.json({status:201, response: deletedProduct});
+            return res.json({status:201, response: "producto eliminado"});
         }
         const error = new Error("Product Not Found");
         error.status = 404;
         throw error;
     } catch (error) {
-        return res.json({
-            status: error.status,
-            response: error.message
-        });
+        next(error);
     }
 }
 

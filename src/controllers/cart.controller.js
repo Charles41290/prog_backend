@@ -30,15 +30,16 @@ const createCart = async (req, res) => {
     }
 }
 
-const addProductToCart = async (req, res) => {
+const addProductToCart = async (req, res, next) => {
     try {
         const {cid,pid} = req.params;
         //const cart = await cartManager.addProductToCart(parseInt(cid),parseInt(pid));
         //const cart = await cartDao.addProductToCart(cid,pid);
-        const cart = await cartService.addProductToCart(cid,pid);
+        const cart = await cartService.addProductToCart(cid,pid,req.user);
         return res.json({status:200,payload:cart});
     } catch (error) {
-        return res.json({status: error.status, response:error.message});
+        // return res.json({status: error.status, response:error.message});
+        next(error)
     }
 }
 

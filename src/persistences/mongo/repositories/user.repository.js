@@ -1,4 +1,5 @@
 import { userModel } from "../models/user.model.js";
+import { isValidPassord } from "../../../utils/hashPassword.js";
 
 const getAll = async () => {
     const users = await userModel.find();
@@ -23,7 +24,7 @@ const create = async (data) => {
 
 const update = async (id, data) => {
     // findByIdAndUpdate devuelve el documento encontrado
-    const user = await userModel.findByIdAndUpdate(id,data);
+    const user = await userModel.findByIdAndUpdate(id,data, {new : true});
     return user;
 }
 

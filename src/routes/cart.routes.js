@@ -24,7 +24,7 @@ router.post("/api/cart/", passportCall("jwt"),authorization("user"), cartControl
 
 // ruta para agregar productos al carrito ya creado
 // isUserCart -> verificamos que el cart pertenezca al user
-router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization("user"), checkProductAndCart, isUserCart ,cartController.addProductToCart);
+router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization(["user","premium"]), checkProductAndCart, isUserCart ,cartController.addProductToCart);
 
 //router.post("/:cid/product/:pid", passportCall("jwt"), authorization("user"), checkProductAndCart, isUserCart, cartsControllers.addProductToCart);
 
@@ -32,14 +32,14 @@ router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization("u
 router.put("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"), checkProductAndCart, cartController.updateProductQuantityInCart);
 
 // ruta para descontar la quantity del producto en el carrito
-router.delete("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization("user"), checkProductAndCart,cartController.deleteProductInCart);
+router.delete("/api/cart/:cid/product/:pid",passportCall("jwt"), authorization(["user","premium"]), checkProductAndCart,cartController.deleteProductInCart);
 
 // ruta para eliminar todos los productos del carrito
-router.delete("/api/cart/:cid", passportCall("jwt"), authorization("user"), cartController.deleteAllProductsInCart);
+router.delete("/api/cart/:cid", passportCall("jwt"), authorization(["user","premium"]), cartController.deleteAllProductsInCart);
 
 // ruta para actualizar el carrito con un array de productos
 // TODO 
 router.put("/api/cart/:cid", passportCall("jwt"), authorization("user"), cartController.updateCartById);
 
-router.get("/api/cart/:cid/purchase", passportCall("jwt"), authorization("user"), cartController.purchaseCart);
+router.get("/api/cart/:cid/purchase", passportCall("jwt"), authorization(["user","premium"]), cartController.purchaseCart);
 export default router;

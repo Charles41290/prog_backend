@@ -6,7 +6,8 @@ export const productDto = (product) => {
         product_code: product.code,
         stock: product.stock,
         price: product.price,
-        category: product.category
+        category: product.category,
+        owner: product.owner
     }
 }
 

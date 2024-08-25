@@ -26,7 +26,7 @@ export const errorHandler = (err, req, res, next) => {
     // si el status es 500 devuelve el mensaje Internal server error
     const msg = status === 500 ? "Internal server error" : err.message
     if(status === 500) { // me interesa loggear este error ya que el cliente unicamente ve un internal server error
-        logger.log("error", err.message);
+        logger.log("error", `${err.path || ""}-${err.message}`);
     }
     res.status(status).json({
         error:{
