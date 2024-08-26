@@ -35,7 +35,7 @@ const deleteOne = async (id) => {
     if (user.deletedCount == 0) {
         return false;
     }
-    return true;
+    return true; 
 }
 
 export default {getAll, getById, create, update, deleteOne, getByEmail}
