@@ -1,0 +1,84 @@
+paths:
+  /api/products:
+    post:
+      tags:
+          - Products
+      summary: create product
+      requestBody:
+        required : true
+        content:
+          application/json:
+            schema:
+                $ref: "#components/requestBodies/createProduct"
+      responses:
+        "201":
+          description: Producto creado con éxito
+        "500":
+            description: Internal Server Error
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+        title:
+          type: string
+        description:
+          type: string
+        thumbnail:
+          type: Array
+        code:
+          type: integer
+        stock:
+          type: integer
+        status:
+          type: boolean
+        price:
+          type: float
+        category:
+          type: string
+        owner:
+          type: string
+      example:
+        _id: ObjectId('665b37df823175c9a2b4b452')
+        title: "Remera"
+        description: "Remera manga larga"
+        price: 30000
+        thumbnail: Array (1)
+        code: "NP1"
+        stock : 15
+        status: true
+        category  : "cat1"
+  requestBodies:
+    createProduct:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        thumbnail:
+          type: Array
+        code:
+          type: integer
+        stock:
+          type: integer
+        price:
+          type: float
+        category:
+          type: string
+      example:
+        title: "Remera"
+        description: "Remera manga larga"
+        price: 30000
+        thumbnail: Array (1)
+        code: "NP1"
+        stock : 15
+        category  : "cat1"
+    
+
+
+
+
+

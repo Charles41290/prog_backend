@@ -19,9 +19,6 @@ router.get("/api/cart", async (req, res) => {
 // ruta para obtener el carrito según su id
 router.get("/api/cart/:cid", cartController.getCartById);
 
-// ruta para crear el carrito
-router.post("/api/cart/", passportCall("jwt"),authorization("user"), cartController.createCart);
-
 // ruta para agregar productos al carrito ya creado
 // isUserCart -> verificamos que el cart pertenezca al user
 router.post("/api/cart/:cid/product/:pid", passportCall("jwt"), authorization(["user","premium"]), checkProductAndCart, isUserCart ,cartController.addProductToCart);

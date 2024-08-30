@@ -12,6 +12,8 @@ import cookieParser from "cookie-parser";
 import env from "./config/env.config.js"
 import { errorHandler } from "./errors/errorHandler.js";
 import { logger } from "./utils/logger.js";
+import swaggerUiExpress from "swagger-ui-express";
+import { specs } from "./config/swagger.config.js";
 
 // establecemos conexión con mongoDB
 connectMongoDb();
@@ -48,6 +50,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 initializePassword();
+
+app.use("/api-docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 //configuro el middleware para cookieParser
 app.use(cookieParser("secret"));

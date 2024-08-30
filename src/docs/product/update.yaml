@@ -1,0 +1,92 @@
+paths:
+  /api/products/{pid}:
+    put:
+      tags:
+          - Products
+      summary: Get product by ID
+      parameters :
+        - name: pid
+          in : path
+          description: product ID
+          required : true
+          schema:
+            type: string
+      requestBody:
+        required : true
+        content:
+          application/json:
+            schema:
+                $ref: "#components/requestBodies/updateProduct"
+      responses:
+        "200":
+          description: Producto obtenido con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/Products"
+        "404":
+          description: Producto no encontrado
+        "500":
+            description: Internal Server Error
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        _id: 
+          type: ObjectId
+        title:
+          type: string
+        description:
+          type: string
+        thumbnail:
+          type: Array
+        code:
+          type: integer
+        stock:
+          type: integer
+        status:
+          type: boolean
+        price:
+          type: float
+        category:
+          type: string
+        owner:
+          type: string
+      example:
+        _id: ObjectId('665b37df823175c9a2b4b452')
+        title: "Remera"
+        description: "Remera manga larga"
+        price: 30000
+        thumbnail: Array (1)
+        code: "NP1"
+        stock : 15
+        status: true
+        category  : "cat1"
+  requestBodies:
+    updateProduct:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        thumbnail:
+          type: Array
+        code:
+          type: integer
+        stock:
+          type: integer
+        price:
+          type: float
+        category:
+          type: string
+      example:
+        title: "Remera"
+        description: "Remera manga larga"
+        price: 30000
+        thumbnail: Array (1)
+        code: "NP1"
+        stock : 15
+        category  : "cat1"
+
