@@ -15,14 +15,29 @@ const createUser = async (req, res) => {
     }
 }
 
+// const userLogin = async (req, res) => {
+//     try {
+//         res.json({status:201, payload:req.user})
+//     } catch (error) {
+//         logger.error(`${error}`);
+//         res.json({status:500, msg:"Error interno en el servidor"});
+//     }
+// }
+
+// se modifico lo anterior para que el token se almacene en una cookie
 const userLogin = async (req, res) => {
     try {
-        res.json({status:201, payload:req.user})
+      const user = req.user;
+      const token = createToken(user);
+      // Guardamos el token en una cookie
+      res.cookie("token", token, { httpOnly: true });
+      const userDto = userResponseDto(user);
+      return res.status(200).json({ status: "success", payload: userDto, token });
     } catch (error) {
-        logger.error(`${error}`);
-        res.json({status:500, msg:"Error interno en el servidor"});
+      console.log(error);
+      res.status(500).json({ status: "Error", msg: "Internal Server Error" });
     }
-}
+  };
 
 const loginGoogle = async (req, res) => {
     try {
