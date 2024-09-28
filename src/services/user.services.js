@@ -23,8 +23,21 @@ const resetPassword = async (email, password) => {
 const changeUserRole = async (uid) => {
     const user = await userRepository.getById(uid);
     if(!user) throw customsErrors.notFoundError("User not found");
-    const userRole = user.role === "premium" ? "user" : "premium" // si el usuario tiene role premium lo cambia a "user" y viceversa
+
+    // si el rol es de usuario y NO ha cargado los 3 documentos
+    if(user.role === "user" && user.documents.length < 3 ) throw customsErrors.badRequestError("No se han cargado los documentos correspondientes")
+
+    const userRole = user.role === "premium" ? "user" : "premium" // si el usuario tiene rol premium lo cambia a "user" y viceversa
     return await userRepository.update(uid, {role:userRole})
 }
 
-export default {sendEmailResetPassword, resetPassword, changeUserRole};
+const addDocuments = async (uid, reqFiles) => {
+    const files = reqFiles.document;
+    const userDocuments = files.map( file => {
+        return {name: file.filename,reference: file.path}
+    })
+    const user = await userRepository.update(uid, {documents: userDocuments});
+    return user;
+}
+
+export default {sendEmailResetPassword, resetPassword, changeUserRole, addDocuments};

@@ -1,0 +1,12 @@
+Looker Studio -> Anteriormente Google Data Studio
+
+2019-antes de la pandemia -> Google compra Looker Data Science(California) por 2600 millones, 4 compra  desde su historia
+EN ese entonces -> AWS tenia el 32% del mercado de infraestructura informática en la nube
+		Microsoft 13,7%
+		Google 7.6%
+
+Parametros -> variables en un lenguaje de programación -> me van a permitir interactuar con el usuario -> 
+
+API -> coNJUNTO DE NORMAS 
+
+Google Analytics -> 
