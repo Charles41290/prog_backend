@@ -17,13 +17,6 @@ export const sendMail = async (email , subject, message) => {
         to: email,
         subject,
         text: message,
-        html: `<div><h1>Bienvenidos a nuestra APP</h1></div><img src = "cid:front-back" />`,
-        attachments: [
-            {
-                filename:"front-back.png",
-                path: __dirname+"/public/images/front-back.png",
-                cid: "front-back"
-            }
-        ]
+        html: `<div>${message}</div>`,
     });
 };

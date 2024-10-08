@@ -30,7 +30,6 @@ const deleteAllProductsInCart = async (cid) => {
     return await cartRepository.deleteAllProductsInCart(cid);
 }
 
-// REVISAR
 const updateCartById = async (query,data) =>{
     return await cartRepository.update(query,data);
 }
@@ -57,12 +56,9 @@ const purchaseCart = async (cid) => {
             products.push(product)
         }
     }
-
     // actualizamos el cart con los products sin stock suficiente
     await cartRepository.updateCartById(cid,products)
-
     return total;
-
 }
 
 export default {

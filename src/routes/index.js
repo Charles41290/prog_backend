@@ -9,13 +9,13 @@ import userRoutes from "./user.routes.js";
 const router = Router();
 
 // especifico las rutas para products
-router.use("/",productRoutes);
+router.use("/api/products",productRoutes);
+
+// especifico las rutas para carts
+router.use("/api/cart",cartRoutes);
 
 // especifico las rutas para test
-router.use("/",cartRoutes);
-
-// especifico las rutas para test
-router.use("/",testRoutes);
+router.use("/api/test",testRoutes);
 
 // especifico las rutas para session
 router.use("/api/session", sessionRoutes);

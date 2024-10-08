@@ -6,7 +6,6 @@ import { createHash, isValidPassord } from "../utils/hashPassword.js";
 const sendEmailResetPassword = async (email) => {
     const msg = "Para restablecer su contraseña utilice el siguiente link: https://www.google.com.ar"
     await sendMail(email, "Restablecer password",msg);
-
     return "Email enviado"
 };
 
