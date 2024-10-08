@@ -1,7 +1,6 @@
 import { productDto } from "../dto/product-response.dto.js";
 import productRepository from "../persistences/mongo/repositories/product.repository.js";
 import error from "../errors/customsErrors.js"
-import { logger } from "../utils/logger.js";
 import { sendMail } from "../utils/sendMails.js";
 
 const getAllProducts = async (query, options) => {

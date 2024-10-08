@@ -1,5 +1,4 @@
 import { query } from "express";
-//import { productModel } from "../models/product.model.js";
 
 const getAll = async (query,options) => {
     const products = await productModel.paginate(query,options);// el plugin paginate fue agregado en productsModel

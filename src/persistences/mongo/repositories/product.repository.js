@@ -1,6 +1,4 @@
-//import productDao from "../dao/mongoDao/product.dao.js";
 import { productModel } from "../models/product.model.js";
-import error from "../../../errors/customsErrors.js"
 
 const getAllProducts = async (query, options) => {
     const products = await productModel.paginate(query,options);// el plugin paginate fue agregado en productsModel
@@ -14,7 +12,6 @@ const getProductById = async (id) => {
 
 const createProduct = async (data) => {
     const newProduct = await productModel.create(data);
-    //if (!newProduct) throw error.missingInfo(msg);
     return newProduct;
 }
 

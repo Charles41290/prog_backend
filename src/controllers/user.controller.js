@@ -1,6 +1,5 @@
 import customsErrors from "../errors/customsErrors.js";
 import userServices from "../services/user.services.js";
-import { logger } from "../utils/logger.js";
 
 const sendEmailResetPassword = async (req, res, next) => {
     try {

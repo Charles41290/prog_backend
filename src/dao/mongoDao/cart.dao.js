@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-//import { cartModel } from "../models/cart.model.js";
 import productDao from "./product.dao.js";
-//import { productModel } from "../models/product.model.js";
 
 const getByID = async (id) => {
     const cart = await cartModel.findById(id);
@@ -17,7 +15,6 @@ const create = async (data) => {
 const addProductToCart = async (cid,pid) => {
     // verificamos la existencia del producto y del carrito por individual
     // buscamos el producto
-    //const product = await productDao.getById(pid);
     const product = productModel.findById(pid)
     if (!product) {
         return {prod:false}
@@ -44,7 +41,6 @@ const addProductToCart = async (cid,pid) => {
 
 // borro un producto en el cart, si quantity > 1 descuento en 1 este campo
 const deleteProductInCart = async (cid,pid) => {
-    //const product = await productDao.getById(pid);
     const product = await productModel.findById(pid);
     if (!product) {
         return {prod:false}

@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import env from "./env.config.js"
 import { logger } from "../utils/logger.js";
 
 const nameDB = 'ecommerce'
